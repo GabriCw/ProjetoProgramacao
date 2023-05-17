@@ -3,6 +3,7 @@ const app = express();
 const port = 3000;
 app.use(express.json());
 
+//DATA
 const users = [
     {
         id: 1,
@@ -20,6 +21,16 @@ const users = [
     }
 ];
 
+//HANDLERS
+const handlePassword = (input) => {
+    const lowerCaseLetters = /[a-z]/g;
+    const upperCase = /[A-Z]/g;
+    const numbers = /[0-9]/g;
+    if (input.match(lowerCaseLetters) && input.match(upperCase) && input.match(numbers) && input.length >= 8)
+        return false
+    return true
+}
+
 //GET ALL
 app.get("/get-all-users", (req, res) => {
     res.json(users);
@@ -27,13 +38,13 @@ app.get("/get-all-users", (req, res) => {
 
 //GET USER BY ID
 app.get("/get-user-by-id", (req, res) => {
-    for (let i = 0; i < users.length; i++) {
-        if (parseInt(req.query.id) === users[i].id) {
-            res.json(users[i]);
+    users.forEach(value => {
+        if (parseInt(req.query.id) === value.id) {
+            res.json(value);
             return;
         }
-    }
-    res.send("ID inválido");
+    })
+    res.send("ID inválido")
 })
 
 //CREATE USER
@@ -50,25 +61,24 @@ app.post("/create-user", (req, res) => {
         res.send("CPF inválido");
         return;
     }
-    if (req.body.password === "" || req.body.password === undefined) {
+    if (req.body.password === "" || req.body.password === undefined || handlePassword(req.body.password)) {
         res.send("Senha inválida");
         return;
     }
-    for (let i = 0; i < users.length; i++) {
-        if (req.body.email === users[i].email && req.body.cpf === users[i].cpf) {
+    users.forEach(value => {
+        if (req.body.email === value.email && req.body.cpf === value.cpf) {
             res.send("Email e CPF já cadastrados");
             return;
         }
-        if (req.body.email === users[i].email) {
+        if (req.body.email === value.email) {
             res.send("Email já cadastrado");
             return;
         }
-        if (req.body.cpf === users[i].cpf) {
+        if (req.body.cpf === value.cpf) {
             res.send("CPF já cadastrado");
             return;
         }
-    }
-
+    })
     const newUser = {
         id: users[users.length - 1].id + 1,
         name: req.body.name,
@@ -82,43 +92,41 @@ app.post("/create-user", (req, res) => {
 
 //DELETE USER BY ID
 app.delete("/delete-user-by-id", (req, res) => {
-    for (let i = 0; i < users.length; i++) {
-        if (parseInt(req.query.id) === users[i].id) {
-            res.json(users[i]);
-            users.splice(i, 1);
+    users.forEach((value, index) => {
+        if (parseInt(req.query.id) === value.id) {
+            res.json(value);
+            users.splice(index, 1);
             return;
         }
-    }
+    })
     res.send("ID inválido");
 })
 
 //UPDATE USER BY ID -> CPF e ID não mudam
 app.put("/update-user-by-id", (req, res) => {
-    for (let i = 0; i < users.length; i++) {
-        if (parseInt(req.query.id) === users[i].id) {
-            if (req.body.name === undefined || req.body.name === ""
-                || req.body.email === undefined || req.body.email == ""
+    users.forEach((value) => {
+        if (parseInt(req.query.id) === value.id) {
+            if (req.body.email === undefined || req.body.email == ""
                 || req.body.password === undefined || req.body.password == "") {
                 res.send("Não é possível alterar o cadastro");
                 return;
             }
 
-            users[i].name = req.body.name;
-            users[i].email = req.body.email;
-            users[i].password = req.body.password;
-            res.json(users[i]);
+            value.email = req.body.email;
+            value.password = req.body.password;
+            res.json(value);
         }
-    }
+    })
 })
 
 //LOGIN
 app.post("/login", (req, res) => {
-    for (let i = 0; i < users.length; i++) {
-        if ((req.body.email === users[i].email || req.body.cpf === users[i].cpf) && req.body.password === users[i].password) {
+    users.forEach(value => {
+        if ((req.body.email === value.email || req.body.cpf === value.cpf) && req.body.password === value.password) {
             res.send("Bem vindo ao Viaggo");
             return;
         }
-    }
+    })
     res.send("Preencha os campos corretamente");
 })
 
