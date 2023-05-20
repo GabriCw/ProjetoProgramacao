@@ -7,24 +7,11 @@
 - Matheus Marins Bernardello     RA: 20.00286-6
 
 # ProjetoProgramacao
-Repositório para projetos de Arquitetura e Programação II
+- Requisições feitas através do Postman, não usamos o ThunderClient.
 
-- Na criação de novos microserviços, instalar:
-    - npm init -y
+## Instalar na pasta de cada microserviço existente os seguintes pacotes para conseguir rodar o código:
     - npm i express
-    - adicionar o "start" nos scripts do package.json
     - npm i nodemon --save-dev
     - npm i dotenv
-    - npm i uuid
-    - npm i axios
-- Para rodar:
+## Para rodar:
     - npm start
-
-- Instalar na pasta de cada microserviço existente os seguintes pacotes para conseguir rodar o código:
-    - npm i express
-    - npm i nodemon --save-dev
-    - npm i dotenv
-    - npm i uuid
-    - npm i axios -> Microserviços || npm i express axios -> Barramento
-- Para rodar:
-    - npm start no barramento e no microserviço que você quer testar.
