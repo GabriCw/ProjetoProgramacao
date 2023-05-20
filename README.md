@@ -1,3 +1,11 @@
+# Membros do Grupo
+- Davi Fernandes Simões Soares   RA: 20.01099-0
+- Felipe Matos Silvieri          RA: 20.00314-5
+- Gabriel dos Santos Couto       RA: 20.00273-4
+- Gabriel Prande Bernardello     RA: 20.01288-8
+- Jonathan Martins Gomes         RA: 20.00862-7
+- Matheus Marins Bernardello     RA: 20.00286-6
+
 # ProjetoProgramacao
 Repositório para projetos de Arquitetura e Programação II
 
