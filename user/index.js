@@ -44,38 +44,38 @@ app.get("/get-user-by-id", (req, res) => {
             return;
         }
     })
-    res.status(500).send("ID inválido")
+    res.status(400).send("ID inválido")
 })
 
 //CREATE USER
 app.post("/create-user", (req, res) => {
     if (req.body.name === "" || req.body.name === undefined) {
-        res.status(500).send("Nome inválido");
+        res.status(400).send("Nome inválido");
         return;
     }
     if (req.body.email === "" || req.body.email === undefined) {
-        res.status(500).send("Email inválido");
+        res.status(400).send("Email inválido");
         return;
     }
     if (req.body.cpf === "" || req.body.cpf === undefined || req.body.cpf.length !== 11) {
-        res.status(500).send("CPF inválido");
+        res.status(400).send("CPF inválido");
         return;
     }
     if (req.body.password === "" || req.body.password === undefined || handlePassword(req.body.password)) {
-        res.status(500).send("Senha inválida");
+        res.status(400).send("Senha inválida");
         return;
     }
     users.forEach(value => {
         if (req.body.email === value.email && req.body.cpf === value.cpf) {
-            res.status(500).send("Email e CPF já cadastrados");
+            res.status(400).send("Email e CPF já cadastrados");
             return;
         }
         if (req.body.email === value.email) {
-            res.status(500).send("Email já cadastrado");
+            res.status(400).send("Email já cadastrado");
             return;
         }
         if (req.body.cpf === value.cpf) {
-            res.status(500).send("CPF já cadastrado");
+            res.status(400).send("CPF já cadastrado");
             return;
         }
     })
@@ -99,7 +99,7 @@ app.delete("/delete-user-by-id", (req, res) => {
             return;
         }
     })
-    res.status(500).send("ID inválido");
+    res.status(400).send("ID inválido");
 })
 
 //UPDATE USER BY ID -> CPF e ID não mudam
@@ -108,7 +108,7 @@ app.put("/update-user-by-id", (req, res) => {
         if (parseInt(req.query.id) === value.id) {
             if (req.body.email === undefined || req.body.email == ""
                 || req.body.password === undefined || req.body.password == "") {
-                res.status(500).send("Não é possível alterar o cadastro");
+                res.status(400).send("Não é possível alterar o cadastro");
                 return;
             }
 
@@ -127,7 +127,7 @@ app.post("/login", (req, res) => {
             return;
         }
     })
-    res.status(500).send("Preencha os campos corretamente");
+    res.status(400).send("Preencha os campos corretamente");
 })
 
 app.listen(port, () => {
