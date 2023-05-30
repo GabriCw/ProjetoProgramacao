@@ -1,0 +1,136 @@
+.content {
+    background-color: #004071;
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.card-content {
+    display: flex;
+    flex-direction: row;
+    width: 1023px;
+    height: 536px;
+    border-radius: 40px;
+    background-color: #FFFFED;
+}
+
+.logo-content {
+    width: 42.72%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.logo {
+    margin-top: 25%;
+}
+
+.barCode {
+    margin-top: 20%;
+}
+
+.data-content {
+    width: 57.28%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+.welcome-title {
+    margin-top: 30px;
+    margin-bottom: 0;
+    text-align: center;
+    color: #004071;
+    font-size: 2rem;
+}
+
+.title {
+    text-align: center;
+    color: #F05D23;
+    font-size: 1.8rem;
+}
+
+.input-content {
+    margin-top: 60px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 50px;
+}
+
+.input {
+    width: 70%;
+    border-top: 0;
+    border-left: 0;
+    border-right: 0;
+    background: none;
+    border-bottom: 3px solid #004071;
+}
+
+.others-content {
+    margin-top: 20px;
+    display: flex;
+    justify-content: space-evenly;
+    gap: 45px;
+}
+
+.others-options {
+    color: #004071;
+    text-decoration: underline;
+}
+
+.button-content {
+    width: 100%;
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: end;
+}
+
+.button-login {
+    width: 320px;
+    height: 65px;
+    border-radius: 25px;
+    background-color: #F05D23;
+    color: #fff;
+    border: none;
+    font-size: 1.3rem;
+    margin-bottom: 30px;
+}
+
+.details-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.hole1 {
+    width: 50px;
+    height: 50px;
+    border-radius: 100px;
+    z-index: 10;
+    background-color: #004071;
+    position: relative;
+    top: -25px;
+}
+
+.hole2 {
+    width: 50px;
+    height: 50px;
+    border-radius: 100px;
+    background-color: #004071;
+    position: relative;
+    bottom: -25px
+}
+
+.line {
+    position: relative;
+    border-left: 5px dashed #D8D8D8;
+    border-collapse: separate;
+    border-spacing: 10px;
+    height: 485px;
+    flex: 1;
+}
