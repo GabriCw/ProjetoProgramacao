@@ -17,7 +17,7 @@
     background-color: #FFFFED;
 }
 
-.logo-container {
+figure.logo-container {
     width: 42.72%;
     height: 100%;
     display: flex;
@@ -69,7 +69,7 @@
 }
 
 
-.data-container {
+main.data-container {
     width: 57.28%;
     height: 100%;
     display: flex;
@@ -78,7 +78,7 @@
     align-items: center;
 }
 
-.titles-container {
+header.titles-container {
     margin-top: 30px;
     display: flex;
     flex-direction: column;
@@ -99,7 +99,7 @@
     margin: 0;
 }
 
-.login-container {
+section.login-container {
     align-items: center;
     display: flex;
     margin: 0 auto;
@@ -111,7 +111,7 @@
     width: 100%;
     display: flex;
     flex-direction: column;
-    gap: 50px;
+    gap: 30px;
 }
 
 .input {
@@ -138,7 +138,8 @@
 }
 
 .others-container {
-    margin-top: 40px;
+    margin-top: 0.1%;
+    margin-bottom: 5%;
     width: 100%;
     display: flex;
     justify-content: space-between;
