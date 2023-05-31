@@ -26,11 +26,11 @@ figure.logo-container {
 }
 
 .logo {
-    margin-top: 25%;
+    margin-top: 16.7%;
 }
 
 .barCode {
-    margin-top: 20%;
+    margin-top: 19.8%;
 }
 
 
@@ -147,13 +147,16 @@ section.login-container {
 
 .others-options {
     margin: 0;
-    font-size: 1.2rem;
+    font-size: 1rem;
     color: #004071;
+    background-color: #FFFFED;
+    border: none;
     text-decoration: underline;
 }
 
 .button-container {
     width: 100%;
+    margin-top: 20px;
     display: flex;
     justify-content: center;
 }

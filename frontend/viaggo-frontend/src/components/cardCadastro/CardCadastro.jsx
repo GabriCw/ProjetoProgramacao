@@ -3,14 +3,15 @@ import logo from "../../assets/logo.png"
 import "./style.css"
 import { useNavigate } from "react-router-dom"
 
-const CardLogin = () => {
+const CardCadastro = () => {
     const navigate = useNavigate()
 
     return <div className="container">
         <div className="card-container">
             <figure className="logo-container">
-                <img src={logo} className="logo" alt="Logo ViagGo" />
-                <img src={barCode} className="barCode" alt="Código de barras genérico"/>
+                <button onClick={() => navigate('/login')} className="voltar">Voltar</button>
+                <img src={logo} className="logo2" alt="Logo ViagGo" />
+                <img src={barCode} className="barCode2" alt="Código de barras genérico"/>
             </figure>
             <div className="details-container">
                 <div className="hole1" />
@@ -19,22 +20,19 @@ const CardLogin = () => {
             </div>
             <main className="data-container">
                 <header className="titles-container">
-                    <h1 className="welcome-title">BEM VINDO PASSAGEIRO</h1>
-                    <h2 className="title">FAÇA SEU LOGIN</h2>
+                    <h1 className="title">REALIZE SEU CADASTRO, PASSAGEIRO</h1>
                 </header>
                 <form>
                     <section className="login-container">
                         <div className="input-container">
-                            <input className="input" type="email" placeholder="CPF ou E-MAIL" />
+                            <input className="input" type="nome" placeholder="NOME" />
+                            <input className="input" type="email" placeholder="E-MAIL" />
+                            <input className="input" type="cpf" placeholder="CPF" />
                             <input className="input" type="password" placeholder="SENHA" />
                         </div>
-                        <div className="others-container">
-                            <button onClick={() => navigate('/escsenha')} className="others-options">ESQUECI MINHA SENHA</button>
-                            <button onClick={() => navigate('/cadastro')} className="others-options">CRIAR CONTA</button>
-                        </div>
                     </section>
-                    <div className="button-container">
-                        <button className="button-login">ENTRAR</button>
+                    <div className="button-container3">
+                        <button onClick={() => navigate('/login')} className="button-login">CADASTRAR</button>
                     </div>
                 </form>
             </main>
@@ -43,4 +41,4 @@ const CardLogin = () => {
     </div>
 }
 
-export default CardLogin
+export default CardCadastro
