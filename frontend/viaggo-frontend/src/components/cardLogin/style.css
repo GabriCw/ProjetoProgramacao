@@ -121,11 +121,21 @@ section.login-container {
     border-right: 0;
     background: none;
     height: 30px;
-    border-bottom: 3px solid #004071;
+    border-bottom: 2px solid #004071;
     font-size: 1.5rem;
     font-family: 'Abel', sans-serif;
     outline: none;
     color: #000;
+}
+
+.password-input-container {
+    display: flex;
+    align-items: center;
+}
+
+.icon {
+    color: #F05D23;
+    cursor: pointer;
 }
 
 ::placeholder {
@@ -138,20 +148,28 @@ section.login-container {
 }
 
 .others-container {
-    margin-top: 0.1%;
-    margin-bottom: 5%;
+    margin-top: 2rem;
+    margin-bottom: 2rem;
     width: 100%;
     display: flex;
     justify-content: space-between;
 }
 
 .others-options {
+    cursor: pointer;
+    padding: 0;
+    font-family: 'Abel', sans-serif;
     margin: 0;
-    font-size: 1rem;
+    font-size: 1.2rem;
     color: #004071;
     background-color: #FFFFED;
     border: none;
     text-decoration: underline;
+    transition: all 0.2s ease-in;
+}
+
+.others-options:hover {
+    transform: scale(1.05);
 }
 
 .button-container {
@@ -169,5 +187,10 @@ section.login-container {
     background-color: #F05D23;
     color: #fff;
     border: none;
+    transition: all 0.2s ease-in-out;
     font-size: 1.8rem;
+}
+
+.button-login:hover {
+    transform: scale(1.05);
 }
