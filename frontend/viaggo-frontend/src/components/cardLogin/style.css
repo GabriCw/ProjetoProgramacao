@@ -17,7 +17,7 @@
     background-color: #FFFFED;
 }
 
-.logo-container {
+figure.logo-container {
     width: 42.72%;
     height: 100%;
     display: flex;
@@ -26,11 +26,11 @@
 }
 
 .logo {
-    margin-top: 25%;
+    margin-top: 16.7%;
 }
 
 .barCode {
-    margin-top: 20%;
+    margin-top: 19.8%;
 }
 
 
@@ -69,7 +69,7 @@
 }
 
 
-.data-container {
+main.data-container {
     width: 57.28%;
     height: 100%;
     display: flex;
@@ -78,7 +78,7 @@
     align-items: center;
 }
 
-.titles-container {
+header.titles-container {
     margin-top: 30px;
     display: flex;
     flex-direction: column;
@@ -99,7 +99,7 @@
     margin: 0;
 }
 
-.login-container {
+section.login-container {
     align-items: center;
     display: flex;
     margin: 0 auto;
@@ -111,7 +111,7 @@
     width: 100%;
     display: flex;
     flex-direction: column;
-    gap: 50px;
+    gap: 30px;
 }
 
 .input {
@@ -121,11 +121,21 @@
     border-right: 0;
     background: none;
     height: 30px;
-    border-bottom: 3px solid #004071;
+    border-bottom: 2px solid #004071;
     font-size: 1.5rem;
     font-family: 'Abel', sans-serif;
     outline: none;
     color: #000;
+}
+
+.password-input-container {
+    display: flex;
+    align-items: center;
+}
+
+.icon {
+    color: #F05D23;
+    cursor: pointer;
 }
 
 ::placeholder {
@@ -138,21 +148,33 @@
 }
 
 .others-container {
-    margin-top: 40px;
+    margin-top: 2rem;
+    margin-bottom: 2rem;
     width: 100%;
     display: flex;
     justify-content: space-between;
 }
 
 .others-options {
+    cursor: pointer;
+    padding: 0;
+    font-family: 'Abel', sans-serif;
     margin: 0;
     font-size: 1.2rem;
     color: #004071;
+    background-color: #FFFFED;
+    border: none;
     text-decoration: underline;
+    transition: all 0.2s ease-in;
+}
+
+.others-options:hover {
+    transform: scale(1.05);
 }
 
 .button-container {
     width: 100%;
+    margin-top: 20px;
     display: flex;
     justify-content: center;
 }
@@ -165,5 +187,10 @@
     background-color: #F05D23;
     color: #fff;
     border: none;
+    transition: all 0.2s ease-in-out;
     font-size: 1.8rem;
+}
+
+.button-login:hover {
+    transform: scale(1.05);
 }
