@@ -33,6 +33,8 @@ figure.logo-container {
   border-radius: 15px;
   background-color: #FFFFED;
   border: none;
+  cursor: pointer;
+  transition: all 0.2s ease-in;
 }
 
 .logo2 {

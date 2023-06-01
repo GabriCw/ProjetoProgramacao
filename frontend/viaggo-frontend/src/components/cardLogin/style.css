@@ -181,6 +181,7 @@ section.login-container {
 
 .button-login {
     font-family: 'Abel', sans-serif;
+    cursor: pointer;
     width: 320px;
     height: 65px;
     border-radius: 25px;

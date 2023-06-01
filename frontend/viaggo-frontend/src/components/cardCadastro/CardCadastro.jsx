@@ -1,10 +1,26 @@
 import barCode from "../../assets/barCode.png"
+import { Visibility, VisibilityOff } from "@mui/icons-material"
+import { useEffect, useState } from "react"
 import logo from "../../assets/logo.png"
 import "./style.css"
 import { useNavigate } from "react-router-dom"
 
 const CardCadastro = () => {
     const navigate = useNavigate()
+
+     const [isPasswordVisible, setIsPasswordVisible] = useState(false);
+    const [typePasswordInput, setTypePasswordInput] = useState("password");
+
+     const handlePasswordVisibility = () => {
+        setIsPasswordVisible(!isPasswordVisible);
+    }
+
+    useEffect(() => {
+        if (isPasswordVisible)
+            setTypePasswordInput("text");
+        else
+            setTypePasswordInput("password");
+    }, [isPasswordVisible])
 
     return <div className="container">
         <div className="card-container">
@@ -28,7 +44,17 @@ const CardCadastro = () => {
                             <input className="input" type="nome" placeholder="NOME" />
                             <input className="input" type="email" placeholder="E-MAIL" />
                             <input className="input" type="cpf" placeholder="CPF" />
-                            <input className="input" type="password" placeholder="SENHA" />
+                             <div className="password-input-container">
+                                <input className="input" type={typePasswordInput} placeholder="SENHA" />
+                                <div onClick={handlePasswordVisibility}>
+                                    {
+                                        isPasswordVisible ?
+                                            <Visibility className="icon" />
+                                            :
+                                            <VisibilityOff className="icon" />
+                                    }
+                                </div>
+                            </div>
                         </div>
                     </section>
                     <div className="button-container3">
