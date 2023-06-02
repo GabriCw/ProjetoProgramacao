@@ -19,6 +19,13 @@ const packages = [
     }
 ];
 
+//HANDLERS
+const handleValidDates = (initialDate, endDate) => {
+    const dateInitial = new Date(initialDate);
+    const dateEnd = new Date(endDate);
+
+    return dateInitial < dateEnd ? false : true;
+}
 
 //GET ALL
 app.get("/get-all-packages", (req, res) => {
@@ -48,6 +55,10 @@ app.post("/create-package", (req, res) => {
     }
     if (req.body.data_volta === "" || req.body.data_volta === undefined) {
         res.status(400).send("Data Volta inválida");
+        return;
+    }
+    if (handleValidDates(req.body.data_ida, req.body.data_volta)) {
+        res.status(400).send("Data Inicial deve ser anterior a Data Volta");
         return;
     }
 
