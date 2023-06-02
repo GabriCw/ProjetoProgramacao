@@ -8,14 +8,14 @@ const packages = [
     {
         id: 1,
         name: "Paris",
-        data_ida: "30/05/23",
-        data_volta: "05/06/23"
+        data_ida: "2023-05-30",
+        data_volta: "2023-06-05"
     },
     {
         id: 2,
         name: "Rio de Janeiro",
-        data_ida: "03/06/23",
-        data_volta: "14/06/23"
+        data_ida: "2023-06-03",
+        data_volta: "2023-06-14"
     }
 ];
 
@@ -23,7 +23,6 @@ const packages = [
 const handleValidDates = (initialDate, endDate) => {
     const dateInitial = new Date(initialDate);
     const dateEnd = new Date(endDate);
-
     return dateInitial < dateEnd ? false : true;
 }
 
@@ -86,11 +85,20 @@ app.delete("/delete-package-by-id", (req, res) => {
 
 //UPDATE PACKAGE BY ID
 app.put("/update-package-by-id", (req, res) => {
+    if (req.query.id === undefined || req.query.id === null) {
+        res.status(400).send("Nenhum ID selecionado");
+        return;
+    }
     packages.forEach((value) => {
         if (parseInt(req.query.id) === value.id) {
             if (req.body.name === undefined || req.body.name === "" || req.body.data_ida === undefined || req.body.data_ida == ""
                 || req.body.data_volta === undefined || req.body.data_volta == "") {
                 res.status(400).send("Não é possível alterar o pacote");
+                return;
+            }
+
+            if (handleValidDates(req.body.data_ida, req.body.data_volta)) {
+                res.status(400).send("Data Inicial deve ser anterior a Data Volta")
                 return;
             }
 
