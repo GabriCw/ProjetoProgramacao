@@ -3,18 +3,18 @@ import ReactDOM from 'react-dom/client';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import './index.css';
 import reportWebVitals from './reportWebVitals';
-import Cadastro from './views/cadastro/Cadastro';
-import EscSenha from './views/escSenha/EscSenha';
-import Login from './views/login/Login';
+import ForgotPasswordView from './views/forgotPasswordView/ForgotPasswordView';
+import LoginView from './views/loginView/LoginView';
+import RegisterView from './views/registerView/RegisterView';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <BrowserRouter>
     <Routes>
-      <Route index element={<Login />} />
-      <Route path="/login" element={<Login />} />
-      <Route path="/cadastro" element={<Cadastro />} />
-      <Route path="/escsenha" element={<EscSenha />} />
+      <Route index element={<LoginView />} />
+      <Route path="/login" element={<LoginView />} />
+      <Route path="/register" element={<RegisterView />} />
+      <Route path="/forgotPassword" element={<ForgotPasswordView />} />
     </Routes>
   </BrowserRouter>
 );
