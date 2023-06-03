@@ -2,10 +2,20 @@ import { Visibility, VisibilityOff } from "@mui/icons-material";
 import { useEffect, useState } from "react";
 import "./style.css";
 
-const LoginInputs = ({ goToForgotPassword, goToRegister }) => {
+const LoginInputs = ({ canLogin, loginInfos, goToForgotPassword, goToRegister }) => {
 
     const [isPasswordVisible, setIsPasswordVisible] = useState(false);
     const [typePasswordInput, setTypePasswordInput] = useState("password");
+
+    const [loginInput, setLoginInput] = useState('')
+    const [passwordInput, setPasswordInput] = useState('')
+
+    const handleLogin = () => {
+        if (loginInput === loginInfos.login && passwordInput === loginInfos.password) {
+            canLogin(true)
+        }
+        canLogin(false)
+    }
 
     const handlePasswordVisibility = () => {
         setIsPasswordVisible(!isPasswordVisible);
@@ -26,9 +36,9 @@ const LoginInputs = ({ goToForgotPassword, goToRegister }) => {
         <form>
             <section className="login-container">
                 <div className="input-container">
-                    <input className="input" type="email" placeholder="CPF ou E-MAIL" />
+                    <input className="input" placeholder="CPF ou E-MAIL" onChange={(e) => setLoginInput(e.target.value)} />
                     <div className="password-input-container">
-                        <input className="input" type={typePasswordInput} placeholder="SENHA" />
+                        <input className="input" type={typePasswordInput} placeholder="SENHA" onChange={(e) => setPasswordInput(e.target.value)} />
                         <div onClick={handlePasswordVisibility}>
                             {
                                 isPasswordVisible ?
@@ -45,7 +55,7 @@ const LoginInputs = ({ goToForgotPassword, goToRegister }) => {
                 </div>
             </section>
             <div className="button-container">
-                <button className="button-login">ENTRAR</button>
+                <button onClick={handleLogin} className="button-login">ENTRAR</button>
             </div>
         </form>
     </>
