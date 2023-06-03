@@ -14,7 +14,7 @@ const LoginView = () => {
 
     return <Card>
         <LoginInputs
-            canLogin={(isCorrectInfos) => isCorrectInfos ? navigate('/homePage') : null}
+            canLogin={(isCorrectInfos) => isCorrectInfos ? navigate('/home') : null}
             loginInfos={LOGIN_ACCEPT}
             goToForgotPassword={() => navigate('/forgotPassword')}
             goToRegister={() => navigate('/register')}

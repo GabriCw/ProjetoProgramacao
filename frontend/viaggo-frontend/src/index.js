@@ -15,7 +15,7 @@ root.render(
       <Route path="/login" element={<LoginView />} />
       <Route path="/register" element={<RegisterView />} />
       <Route path="/forgotPassword" element={<ForgotPasswordView />} />
-      <Route path="/homePage" element={<HomePageView />} />
+      <Route path="/home" element={<HomePageView />} />
     </Routes>
   </BrowserRouter>
 );
