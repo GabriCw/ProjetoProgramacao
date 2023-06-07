@@ -1,4 +1,5 @@
 import logo from "../../assets/logo.png"
+import { AccountCircle } from "@mui/icons-material";
 import "./style.css"
 
 const NavBar = ({ goToHome, goToLogin }) => {
@@ -16,6 +17,7 @@ const NavBar = ({ goToHome, goToLogin }) => {
                 </a>
             </div>
             <div className="user-quit-items">
+                <AccountCircle className="icon-user" />
                 <a className="item">
                     Nome Usuário
                 </a>
