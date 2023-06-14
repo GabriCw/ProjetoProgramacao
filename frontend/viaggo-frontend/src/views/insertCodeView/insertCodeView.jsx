@@ -7,7 +7,7 @@ const InsertCodeView = () => {
   
       const navigate = useNavigate()
   
-      return <Card goToLogin={() => navigate(-1)}>
+      return <Card goToLogin={() => navigate('/forgotPassword')}>
           <InsertCodeInput
           goToLogin={() => navigate('/newPassword')}
           />
