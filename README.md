@@ -16,5 +16,6 @@
 ## Instalar na pasta de frontend
     - npm install
     - npm i react-router-dom
+    -npm i axios
 ## Para rodar:
     - npm start
