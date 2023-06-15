@@ -13,6 +13,7 @@
     - npm i express
     - npm i nodemon --save-dev
     - npm i dotenv
+    - npm i cors
 ## Instalar na pasta de frontend
     - npm install
     - npm i react-router-dom
