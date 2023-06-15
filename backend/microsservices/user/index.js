@@ -1,7 +1,10 @@
 const express = require("express");
+const cors = require("cors");
 const app = express();
-const port = 3000;
+const port = 5000;
 app.use(express.json());
+
+app.use(cors());
 
 //DATA
 const users = [
@@ -18,6 +21,13 @@ const users = [
         email: "gab@gmail.com",
         cpf: "55566677789",
         password: "baaasada"
+    },
+    {
+        id: 3,
+        name: "Felipe",
+        email: "lip@gmail.com",
+        cpf: "52100029312",
+        password: "arregacamoleza"
     }
 ];
 
