@@ -5,22 +5,22 @@ import './index.css';
 import reportWebVitals from './reportWebVitals';
 import ForgotPasswordView from './views/forgotPasswordView/ForgotPasswordView';
 import HomePageView from './views/homePageView/HomePageView';
-import LoginView from './views/loginView/LoginView';
-import RegisterView from './views/registerView/RegisterView';
 import InsertCodeView from './views/insertCodeView/insertCodeView';
+import LoginView from './views/loginView/LoginView';
 import NewPasswordView from './views/newPasswordView/newPasswordView';
+import RegisterView from './views/registerView/RegisterView';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <BrowserRouter>
     <Routes>
-      <Route index element={<LoginView />} />
-      <Route path="/login" element={<LoginView />} />
-      <Route path="/register" element={<RegisterView />} />
-      <Route path="/forgotPassword" element={<ForgotPasswordView />} />
-      <Route path="/home" element={<HomePageView />} />
-      <Route path="/code" element={<InsertCodeView />}/> 
-      <Route path="/newPassword" element={<NewPasswordView />}/> 
+      {/* <Route index element={<LoginView />} /> */}
+      <Route index path="login" element={<LoginView />} />
+      <Route path="register" element={<RegisterView />} />
+      <Route path="forgotPassword" element={<ForgotPasswordView />} />
+      <Route path="home" element={<HomePageView />} />
+      <Route path="code" element={<InsertCodeView />} />
+      <Route path="newPassword" element={<NewPasswordView />} />
     </Routes>
   </BrowserRouter>
 );

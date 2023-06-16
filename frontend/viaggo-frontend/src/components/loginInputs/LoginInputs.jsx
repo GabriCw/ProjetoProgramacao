@@ -1,10 +1,9 @@
 import { Visibility, VisibilityOff } from "@mui/icons-material";
 import { useEffect, useState } from "react";
+import { login } from "../../services/user.services";
 import "./style.css";
-import api from "../../Api.js";
-import axios from 'axios';
 
-const LoginInputs = ({ canLogin, loginInfos, goToForgotPassword, goToRegister, dados}) => {
+const LoginInputs = ({ canLogin, goToForgotPassword, goToRegister }) => {
 
     const [isPasswordVisible, setIsPasswordVisible] = useState(false);
     const [typePasswordInput, setTypePasswordInput] = useState("password");
@@ -12,29 +11,20 @@ const LoginInputs = ({ canLogin, loginInfos, goToForgotPassword, goToRegister, d
     const [loginInput, setLoginInput] = useState('')
     const [passwordInput, setPasswordInput] = useState('')
 
-    useEffect(()=>{
-        api.get('/get-all-users').then(res=>{
-            dados = res.data;
-            console.log(dados);
-            loginInfos.email = dados.email;
-            loginInfos.cpf = dados.cpf;
-            loginInfos.password = dados.password;
-        })
-    })
+    const handleLogin = async (event) => {
+        event.preventDefault();
 
-    const handleLogin = () => {
+        const data = {
+            login: loginInput,
+            password: passwordInput
+        }
 
-       dados.forEach((objeto) => {
-            if (loginInput === objeto.email || loginInput === objeto.cpf && passwordInput === objeto.password){
-                canLogin(true)
-            }
-            canLogin(false)
-        });
+        const isPermitted = await login(data);
+        canLogin(isPermitted === true)
 
-        // if (loginInput === loginInfos.email || loginInput === loginInfos.cpf && passwordInput === loginInfos.password) {
-        //     canLogin(true)
-        // }
-        // canLogin(false)
+        if (isPermitted !== true) {
+            alert(isPermitted)
+        }
     }
 
     const handlePasswordVisibility = () => {
@@ -75,7 +65,7 @@ const LoginInputs = ({ canLogin, loginInfos, goToForgotPassword, goToRegister, d
                 </div>
             </section>
             <div className="button-container">
-                <button onClick={handleLogin} className="button-login">ENTRAR</button>
+                <button onClick={(event) => handleLogin(event)} className="button-login">ENTRAR</button>
             </div>
         </form>
     </>
