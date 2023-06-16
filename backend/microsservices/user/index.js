@@ -132,7 +132,7 @@ app.put("/update-user-by-id", (req, res) => {
 //LOGIN
 app.post("/login", (req, res) => {
     users.forEach(value => {
-        if ((req.body.email === value.email || req.body.cpf === value.cpf) && req.body.password === value.password) {
+        if ((req.body.login === value.email || req.body.login === value.cpf) && req.body.password === value.password) {
             res.send("Bem vindo ao Viaggo");
             return;
         }
