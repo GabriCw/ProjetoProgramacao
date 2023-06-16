@@ -21,7 +21,7 @@ const Card = ({ children, goToLogin }) => {
             <figure className="logo-container">
 
                 <button onClick={goToLogin} className="voltar" style={hasNavigation ? null : { color: "#FFFFED", cursor: "initial" }}>
-                    {hasNavigation ? <span>Voltar</span> : <span>curioso ein</span>}
+                    {hasNavigation ? <span>Voltar</span> : <span>se leu mamou</span>}
                 </button>
 
                 <img src={logo} className="logo" alt="Logo ViagGo" />

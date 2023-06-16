@@ -1,8 +1,10 @@
 import { Visibility, VisibilityOff } from "@mui/icons-material";
 import { useEffect, useState } from "react";
 import "./style.css";
+import api from "../../Api.js";
+import axios from 'axios';
 
-const LoginInputs = ({ canLogin, loginInfos, goToForgotPassword, goToRegister }) => {
+const LoginInputs = ({ canLogin, loginInfos, goToForgotPassword, goToRegister, dados}) => {
 
     const [isPasswordVisible, setIsPasswordVisible] = useState(false);
     const [typePasswordInput, setTypePasswordInput] = useState("password");
@@ -10,11 +12,29 @@ const LoginInputs = ({ canLogin, loginInfos, goToForgotPassword, goToRegister })
     const [loginInput, setLoginInput] = useState('')
     const [passwordInput, setPasswordInput] = useState('')
 
+    useEffect(()=>{
+        api.get('/get-all-users').then(res=>{
+            dados = res.data;
+            console.log(dados);
+            loginInfos.email = dados.email;
+            loginInfos.cpf = dados.cpf;
+            loginInfos.password = dados.password;
+        })
+    })
+
     const handleLogin = () => {
-        if (loginInput === loginInfos.login && passwordInput === loginInfos.password) {
-            canLogin(true)
-        }
-        canLogin(false)
+
+       dados.forEach((objeto) => {
+            if (loginInput === objeto.email || loginInput === objeto.cpf && passwordInput === objeto.password){
+                canLogin(true)
+            }
+            canLogin(false)
+        });
+
+        // if (loginInput === loginInfos.email || loginInput === loginInfos.cpf && passwordInput === loginInfos.password) {
+        //     canLogin(true)
+        // }
+        // canLogin(false)
     }
 
     const handlePasswordVisibility = () => {

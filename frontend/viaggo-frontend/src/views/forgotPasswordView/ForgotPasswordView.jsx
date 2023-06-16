@@ -7,9 +7,9 @@ const ForgotPasswordView = () => {
 
     const navigate = useNavigate()
 
-    return <Card goToLogin={() => navigate(-1)}>
+    return <Card goToLogin={() => navigate('/login')}>
         <ForgotPasswordInput
-            goToLogin={() => navigate('/login')}
+            goToLogin={() => navigate('/code')}
         />
     </Card>
 }

@@ -77,3 +77,8 @@ main.data-container {
     justify-content: space-around;
     align-items: center;
 }
+
+.voltar:hover {
+    transform: scale(1.02);
+  }
+  
