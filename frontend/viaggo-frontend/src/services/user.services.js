@@ -20,7 +20,7 @@ export const registerUser = async (data) => {
     try {
         const response = await axios.post(_baseUrl + _endpoint, data)
         if (response.status === 200) {
-            return response.data;
+            return true;
         }
     }
     catch (error) {
