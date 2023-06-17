@@ -20,3 +20,7 @@
     -npm i axios
 ## Para rodar:
     - npm start
+
+## Tags
+
+git tag -a nome -m descrição
