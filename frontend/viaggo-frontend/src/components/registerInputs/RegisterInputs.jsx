@@ -7,6 +7,7 @@ const RegisterInputs = ({ goToLogin }) => {
 
     const [isPasswordVisible, setIsPasswordVisible] = useState(false);
     const [typePasswordInput, setTypePasswordInput] = useState("password");
+    const [click, setClick] = useState(false);
 
     const [nameInput, setNameInput] = useState('')
     const [emailInput, setEmailInput] = useState('')
@@ -38,7 +39,7 @@ const RegisterInputs = ({ goToLogin }) => {
     const handlePasswordVisibility = () => {
         setIsPasswordVisible(!isPasswordVisible);
     }
-
+    
     useEffect(() => {
         if (isPasswordVisible)
             setTypePasswordInput("text");
