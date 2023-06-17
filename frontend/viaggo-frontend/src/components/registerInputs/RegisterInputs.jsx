@@ -1,8 +1,7 @@
-import { Visibility, VisibilityOff } from "@mui/icons-material"
-import { useEffect, useState } from "react"
-import "./style.css"
-import api from "../../Api.js";
-import axios from 'axios';
+import { Visibility, VisibilityOff } from "@mui/icons-material";
+import { useEffect, useState } from "react";
+import { registerUser } from "../../services/user.services";
+import "./style.css";
 
 const RegisterInputs = ({ goToLogin }) => {
 
@@ -14,28 +13,33 @@ const RegisterInputs = ({ goToLogin }) => {
     const [emailInput, setEmailInput] = useState('')
     const [cpfInput, setCpfInput] = useState('')
     const [passwordInput, setPasswordInput] = useState('')
+    const [focus, setFocus] = useState(false)
+    const [placeholder, setPlaceholder] = useState('SENHA')
 
-    const handlePasswordVisibility = ({ goToHome }) => {
+    const handleRegister = async (event) => {
+        event.preventDefault();
+
+        const credenciais = {
+            name: nameInput,
+            email: emailInput,
+            cpf: cpfInput,
+            password: passwordInput
+        }
+
+        const createUser = await registerUser(credenciais);
+        if (createUser === true) {
+            goToLogin(true)
+            alert('Usuário criado com sucesso!')
+        }
+        else {
+            alert(createUser)
+        }
+    }
+
+    const handlePasswordVisibility = () => {
         setIsPasswordVisible(!isPasswordVisible);
     }
-
-    const credenciais = {
-        name: nameInput,
-        email: emailInput,
-        cpf: cpfInput,
-        password: passwordInput
-    }
-
-    useEffect(()=>{
-        if (click){
-            const response = api.post(`/create-user`, credenciais)
-            if (response.status === 400){
-                goToLogin()
-            }    
-        }
-    },[click])
-
-
+    
     useEffect(() => {
         if (isPasswordVisible)
             setTypePasswordInput("text");
@@ -50,11 +54,24 @@ const RegisterInputs = ({ goToLogin }) => {
         <form>
             <section className="login-container">
                 <div className="input-container">
-                    <input className="input" type="nome" placeholder="NOME" onChange={(e) => setNameInput(e.target.value)}/>
-                    <input className="input" type="email" placeholder="E-MAIL" onChange={(e) => setEmailInput(e.target.value)}/>
-                    <input className="input" type="cpf" placeholder="CPF" onChange={(e) => setCpfInput(e.target.value)}/>
+                    <input className="input" type="nome" placeholder="NOME" onChange={(e) => setNameInput(e.target.value)} />
+                    <input className="input" type="email" placeholder="E-MAIL" onChange={(e) => setEmailInput(e.target.value)} />
+                    <input className="input" type="cpf" placeholder="CPF" onChange={(e) => setCpfInput(e.target.value)} />
                     <div className="password-input-container">
-                        <input className="input" type={typePasswordInput} placeholder="SENHA" onChange={(e) => setPasswordInput(e.target.value)}/>
+                        <input
+                            className="input"
+                            type={typePasswordInput}
+                            onMouseEnter={() => {
+                                setFocus(true)
+                                setPlaceholder('Necessário: letra maiúscula, minúscula, número, +7 caracteres')
+                            }}
+                            onMouseLeave={() => {
+                                setFocus(false)
+                                setPlaceholder('SENHA')
+                            }}
+                            placeholder={placeholder}
+                            style={focus ? { fontSize: '1rem' } : null}
+                            onChange={(e) => setPasswordInput(e.target.value)} />
                         <div onClick={handlePasswordVisibility}>
                             {
                                 isPasswordVisible ?
@@ -67,7 +84,7 @@ const RegisterInputs = ({ goToLogin }) => {
                 </div>
             </section>
             <div className="button-container3">
-                <button onClick={()=>setClick(true)} className="button-login">CADASTRAR</button>
+                <button onClick={(event) => handleRegister(event)} className="button-login">CADASTRAR</button>
             </div>
         </form>
     </>

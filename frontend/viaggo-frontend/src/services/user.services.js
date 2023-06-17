@@ -14,3 +14,16 @@ export const login = async (data) => {
         return error.response.data;
     }
 }
+
+export const registerUser = async (data) => {
+    const _endpoint = "/create-user";
+    try {
+        const response = await axios.post(_baseUrl + _endpoint, data)
+        if (response.status === 200) {
+            return true;
+        }
+    }
+    catch (error) {
+        return error.response.data;
+    }
+}
