@@ -14,8 +14,8 @@ const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <BrowserRouter>
     <Routes>
-      {/* <Route index element={<LoginView />} /> */}
-      <Route index path="login" element={<LoginView />} />
+      <Route index element={<LoginView />} />
+      <Route path="login" element={<LoginView />} />
       <Route path="register" element={<RegisterView />} />
       <Route path="forgotPassword" element={<ForgotPasswordView />} />
       <Route path="home" element={<HomePageView />} />

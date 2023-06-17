@@ -26,15 +26,16 @@ const RegisterInputs = ({ goToLogin }) => {
         }
 
         const createUser = await registerUser(credenciais);
-        goToLogin(createUser === true)
-        alert('Usuário criado com sucesso!')
-
-        if (createUser !== true) {
+        if (createUser === true) {
+            goToLogin(true)
+            alert('Usuário criado com sucesso!')
+        }
+        else {
             alert(createUser)
         }
     }
 
-    const handlePasswordVisibility = ({ goToHome }) => {
+    const handlePasswordVisibility = () => {
         setIsPasswordVisible(!isPasswordVisible);
     }
 
