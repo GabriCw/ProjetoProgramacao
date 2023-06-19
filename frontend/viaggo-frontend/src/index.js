@@ -9,6 +9,7 @@ import InsertCodeView from './views/insertCodeView/insertCodeView';
 import LoginView from './views/loginView/LoginView';
 import NewPasswordView from './views/newPasswordView/newPasswordView';
 import RegisterView from './views/registerView/RegisterView';
+import { ToastContainer, Zoom } from 'react-toastify';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
@@ -22,6 +23,11 @@ root.render(
       <Route path="code" element={<InsertCodeView />} />
       <Route path="newPassword" element={<NewPasswordView />} />
     </Routes>
+    <ToastContainer
+    theme='colored'
+    autoClose={2000}
+    transition={Zoom}
+    newestOnTop/>
   </BrowserRouter>
 );
 

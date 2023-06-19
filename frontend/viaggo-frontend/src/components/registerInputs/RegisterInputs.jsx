@@ -2,6 +2,8 @@ import { Visibility, VisibilityOff } from "@mui/icons-material";
 import { useEffect, useState } from "react";
 import { registerUser } from "../../services/user.services";
 import "./style.css";
+import { ToastContainer, toast } from 'react-toastify';
+  import 'react-toastify/dist/ReactToastify.css';
 
 const RegisterInputs = ({ goToLogin }) => {
 
@@ -29,10 +31,10 @@ const RegisterInputs = ({ goToLogin }) => {
         const createUser = await registerUser(credenciais);
         if (createUser === true) {
             goToLogin(true)
-            alert('Usuário criado com sucesso!')
+            toast.success('Usuário criado com sucesso!')
         }
-        else {
-            alert(createUser)
+        else {  
+            toast.error(createUser)
         }
     }
 

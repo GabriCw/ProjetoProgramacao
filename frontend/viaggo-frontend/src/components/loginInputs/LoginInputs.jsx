@@ -2,6 +2,7 @@ import { Visibility, VisibilityOff } from "@mui/icons-material";
 import { useEffect, useState } from "react";
 import { login } from "../../services/user.services";
 import "./style.css";
+import { toast } from "react-toastify";
 
 const LoginInputs = ({ canLogin, goToForgotPassword, goToRegister }) => {
 
@@ -23,7 +24,7 @@ const LoginInputs = ({ canLogin, goToForgotPassword, goToRegister }) => {
         canLogin(isPermitted === true)
 
         if (isPermitted !== true) {
-            alert(isPermitted)
+            toast.error(isPermitted)
         }
     }
 
