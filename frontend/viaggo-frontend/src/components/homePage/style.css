@@ -10,9 +10,10 @@
     height: inherit;
     align-items: center;
     flex-direction: row;
+    justify-content: space-evenly;
 }
 
-.card-topic ul {
+.card-topic div {
     display: flex;
     justify-content: center;
     flex-direction: row;
@@ -22,7 +23,7 @@
     list-style-type: none;
 }
 
-.card-topic ul li {
+.card-topic div {
     width: 300px;
     background-color: #ccc;
     height: 300px;

@@ -9,13 +9,22 @@ const packages = [
         id: 1,
         name: "Paris",
         data_ida: "2023-05-30",
-        data_volta: "2023-06-05"
+        data_volta: "2023-06-05",
+        details: "muito foda"
     },
     {
         id: 2,
         name: "Rio de Janeiro",
         data_ida: "2023-06-03",
-        data_volta: "2023-06-14"
+        data_volta: "2023-06-14",
+        details: "muito roubo"
+    },
+    {
+        id: 3,
+        name: "Angola",
+        data_ida: "2023-08-16",
+        data_volta: "2023-08-22",
+        details: "não gostei, asmei"
     }
 ];
 
@@ -65,7 +74,8 @@ app.post("/create-package", (req, res) => {
         id: packages[packages.length - 1].id + 1,
         name: req.body.name,
         data_ida: req.body.data_ida,
-        data_volta: req.body.data_volta
+        data_volta: req.body.data_volta,
+        details: req.body.details
     };
     packages.push(newPackage);
     res.json(newPackage);
@@ -92,7 +102,7 @@ app.put("/update-package-by-id", (req, res) => {
     packages.forEach((value) => {
         if (parseInt(req.query.id) === value.id) {
             if (req.body.name === undefined || req.body.name === "" || req.body.data_ida === undefined || req.body.data_ida == ""
-                || req.body.data_volta === undefined || req.body.data_volta == "") {
+                || req.body.data_volta === undefined || req.body.data_volta == "" || req.body.details === undefined || req.body.details === "") {
                 res.status(400).send("Não é possível alterar o pacote");
                 return;
             }
@@ -105,6 +115,7 @@ app.put("/update-package-by-id", (req, res) => {
             value.name = req.body.name;
             value.data_ida = req.body.data_ida;
             value.data_volta = req.body.data_volta;
+            value.details = req.body.details;
             res.json(value);
         }
     })
