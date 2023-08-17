@@ -10,21 +10,24 @@ const packages = [
         name: "Paris",
         data_ida: "2023-05-30",
         data_volta: "2023-06-05",
-        details: "muito foda"
+        details: "muito foda",
+        image_url: "https://images.pexels.com/photos/8433681/pexels-photo-8433681.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
     },
     {
         id: 2,
         name: "Rio de Janeiro",
         data_ida: "2023-06-03",
         data_volta: "2023-06-14",
-        details: "muito roubo"
+        details: "muito roubo",
+        image_url:"https://images.unsplash.com/photo-1613390250147-171878866f04?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=436&q=80"
     },
     {
         id: 3,
         name: "Angola",
         data_ida: "2023-08-16",
         data_volta: "2023-08-22",
-        details: "não gostei, asmei"
+        details: "não gostei, asmei",
+        image_url:"https://images.unsplash.com/photo-1630343350724-2eafe052719f?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=435&q=80"
     }
 ];
 
@@ -75,7 +78,8 @@ app.post("/create-package", (req, res) => {
         name: req.body.name,
         data_ida: req.body.data_ida,
         data_volta: req.body.data_volta,
-        details: req.body.details
+        details: req.body.details,
+        image_url: req.body.image_url
     };
     packages.push(newPackage);
     res.json(newPackage);

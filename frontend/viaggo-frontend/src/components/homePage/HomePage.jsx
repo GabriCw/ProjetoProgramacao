@@ -1,13 +1,25 @@
 import { Box, Modal } from "@mui/material";
 import { useEffect, useState } from "react";
-import { getAllPackages, getPackageById } from "../../services/package.services";
+import { getAllPackages, getPackageById, deletePackageById, updatePackageById } from "../../services/package.services";
 import "./style.css";
+import { FaTrash } from 'react-icons/fa';
+import { AiOutlineClose } from 'react-icons/ai';
+import { GrUpdate } from 'react-icons/gr';
 
 const HomePage = () => {
-
+    
     const [packages, setPackages] = useState([]);
     const [packageClicked, setPackageClicked] = useState(false);
     const [packageDetail, setPackageDetail] = useState([]);
+    const [itemDeleted, setItemDeleted] = useState(false);
+    const [updateClicked, setUpdateClicked] = useState(false);
+    const [itemUpdated, setItemUpdated] = useState(false)
+    
+    const [name, setName] = useState('');
+    const [dataIda, setDataIda] = useState('');
+    const [dataVolta, setDataVolta] = useState('');
+    const [details, setDetails] = useState('');
+
 
     useEffect(() => {
         const requestData = async () => {
@@ -16,24 +28,66 @@ const HomePage = () => {
         };
 
         requestData();
-    }, []);
+    }, [itemDeleted,itemUpdated]);
+
 
     const handleClick = async (id) => {
         const response = await getPackageById(id);
         setPackageDetail(response);
         setPackageClicked(true)
     };
+    
+    
+    const handleDelete = async (id) => {
+        try {
+            setPackageClicked(false);
+            const response = await deletePackageById(id);
+            setItemDeleted(!itemDeleted);
+            console.log(response); // Você pode fazer algo com a resposta, se necessário
+        } catch (error) {
+            console.error('Erro ao deletar o pacote:', error);
+        }
+    };
 
+    const handleSubmit = async (event) => {
+        event.preventDefault();
+
+        try {
+            const response = await updatePackageById(packageDetail.id, {
+                name: name,
+                data_ida: dataIda,
+                data_volta: dataVolta,
+                details: details
+            });
+            console.log(response);
+            setItemUpdated(!itemUpdated);
+            setUpdateClicked(false);
+            // Lógica adicional após a atualização, se necessário
+        } catch (error) {
+            console.error('Erro ao atualizar o pacote:', error);
+        }
+    };
+    
     const close = () => setPackageClicked(false);
+    const closeUpdate = () => setUpdateClicked(false);
 
     return <div className="container-homepage">
         <div className="card-topic">
             {
                 packages.map(item => {
                     return <div onClick={() => handleClick(item.id)}>
-                        <p>{item.name}</p>
-                        <p>{item.data_ida}</p>
-                        <p>{item.data_volta}</p>
+                            <div className="package-image">
+                                <img className="package-image" src={item.image_url} alt={`Package ${item.name} Image`} width={300} height={300}/>
+                            </div>
+                        <div className="package-details">
+                            <div className="package-name">
+                                <p>{item.name}</p>
+                            </div>
+                            <div className="date">
+                                <p>{item.data_ida}</p>
+                                <p>{item.data_volta}</p>
+                            </div>
+                        </div>
                     </div>
                 })
             }
@@ -45,11 +99,78 @@ const HomePage = () => {
             aria-describedby="modal-modal-description"
         >
             <Box sx={style}>
+                
+                <div className="package-detail-close-delete">
+                    <AiOutlineClose
+                        onClick={close}
+                    ></AiOutlineClose>
+                    <GrUpdate
+                        onClick={() => setUpdateClicked(true)}
+                    >
+                    </GrUpdate>
+                    <FaTrash
+                        onClick={() => handleDelete(packageDetail.id)}
+                    ></FaTrash>
+                </div>
+                
                 <h1>Detalhes do Pacote</h1>
                 <p>Nome: {packageDetail.name}</p>
                 <p>Data Ida: {packageDetail.data_ida}</p>
                 <p>Data Volta: {packageDetail.data_volta}</p>
                 <p>Detalhes: {packageDetail.details}</p>
+            </Box>
+        </Modal>
+        
+        <Modal
+            open={updateClicked}
+            onClose={closeUpdate}
+            aria-labelledby="modal-modal-title"
+            aria-describedby="modal-modal-description"
+        >
+            <Box sx={style}>
+                    <div className="update-close">
+                        <AiOutlineClose
+                            onClick={closeUpdate}
+                        ></AiOutlineClose>
+                    </div>
+                <form onSubmit={handleSubmit} className="update-form">
+                    <div className="form-item">
+                        <label htmlFor="name">Nome:</label>
+                        <input
+                            type="text"
+                            id="name"
+                            value={name}
+                            onChange={(e) => setName(e.target.value)}
+                        />
+                    </div>
+                    <div className="form-item">
+                        <label htmlFor="dataIda">Data de Ida:</label>
+                        <input
+                            type="text"
+                            id="dataIda"
+                            value={dataIda}
+                            onChange={(e) => setDataIda(e.target.value)}
+                        />
+                    </div>
+                    <div className="form-item">
+                        <label htmlFor="dataVolta">Data de Volta:</label>
+                        <input
+                            type="text"
+                            id="dataVolta"
+                            value={dataVolta}
+                            onChange={(e) => setDataVolta(e.target.value)}
+                        />
+                    </div>
+                    <div className="form-item">
+                        <label htmlFor="details">Detalhes:</label>
+                        <textarea
+                            id="details"
+                            value={details}
+                            onChange={(e) => setDetails(e.target.value)}
+                        />
+                    </div>
+                    <button type="submit">Atualizar Pacote</button>
+                </form>
             </Box>
         </Modal>
     </div>

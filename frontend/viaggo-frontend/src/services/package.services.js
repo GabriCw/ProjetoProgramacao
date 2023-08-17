@@ -1,4 +1,5 @@
 import axios from "axios";
+const cors = require('cors');
 
 const _baseUrl = "http://localhost:3000";
 
@@ -26,6 +27,7 @@ export const getPackageById = async (id) => {
 
         if (response.status === 200) {
             return response.data;
+            console.log('ola')
         }
     }
 
@@ -33,3 +35,35 @@ export const getPackageById = async (id) => {
         return error.response.data;
     }
 }
+
+export const deletePackageById = async (id) => {
+    const _endpoint = `/delete-package-by-id?id=${id}`;
+
+    try {
+        const response = await axios.delete(_baseUrl + _endpoint);
+
+        if (response.status === 200) {
+            return response.data;
+            console.log('deletado')
+        }
+    }
+
+    catch (error) {
+        return error.response.data;
+    }
+}
+
+export const updatePackageById = async (id, newData) => {
+    const _endpoint = `/update-package-by-id?id=${id}`;
+
+    try {
+        const response = await axios.put(_baseUrl + _endpoint, newData);
+
+        if (response.status === 200) {
+            return response.data;
+        }
+    } catch (error) {
+        return error.response.data;
+    }
+};
+
