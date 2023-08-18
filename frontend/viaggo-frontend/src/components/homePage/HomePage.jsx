@@ -5,7 +5,7 @@ import "./style.css";
 import { FaTrash, FaPlaneArrival, FaPlaneDeparture} from 'react-icons/fa';
 import { AiOutlineClose } from 'react-icons/ai';
 import { GrUpdate } from 'react-icons/gr';
-import { BiSolidPencil, BiSolidCity } from 'react-icons/bi';
+import { BiSolidPencil } from 'react-icons/bi';
 
 const HomePage = () => {
     
@@ -44,7 +44,7 @@ const HomePage = () => {
             setPackageClicked(false);
             const response = await deletePackageById(id);
             setItemDeleted(!itemDeleted);
-            console.log(response); // Você pode fazer algo com a resposta, se necessário
+            console.log(response);
         } catch (error) {
             console.error('Erro ao deletar o pacote:', error);
         }
@@ -63,7 +63,6 @@ const HomePage = () => {
             console.log(response);
             setItemUpdated(!itemUpdated);
             setUpdateClicked(false);
-            // Lógica adicional após a atualização, se necessário
         } catch (error) {
             console.error('Erro ao atualizar o pacote:', error);
         }
