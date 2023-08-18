@@ -23,4 +23,5 @@
 
 ## Tags
 
-git tag -a nome -m descrição
+git tag -a "nome" -m "descrição"
+git push origin nome
