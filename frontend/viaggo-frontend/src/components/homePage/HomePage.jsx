@@ -5,7 +5,7 @@ import "./style.css";
 import { FaTrash, FaPlaneArrival, FaPlaneDeparture} from 'react-icons/fa';
 import { AiOutlineClose } from 'react-icons/ai';
 import { GrUpdate } from 'react-icons/gr';
-import { BiSolidPencil } from 'react-icons/bi';
+import { BiSolidPencil, BiSolidCity } from 'react-icons/bi';
 
 const HomePage = () => {
     
@@ -114,11 +114,13 @@ const HomePage = () => {
                     ></FaTrash>
                 </div>
                 
-                <h1>Detalhes do Pacote</h1>
-                <p>Nome: {packageDetail.name}</p>
-                <p>Data Ida: {packageDetail.data_ida}</p>
-                <p>Data Volta: {packageDetail.data_volta}</p>
-                <p>Detalhes: {packageDetail.details}</p>
+                <div className="package-detail-text">
+                    <h1>Detalhes do Pacote</h1>
+                    <h3>{packageDetail.name}</h3>
+                    <p>Data Ida: {packageDetail.data_ida}</p>
+                    <p>Data Volta: {packageDetail.data_volta}</p>
+                    <p>Detalhes Local: {packageDetail.details}</p>
+                </div>
             </Box>
         </Modal>
         

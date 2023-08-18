@@ -41,6 +41,14 @@
     justify-content: space-between;
 }
 
+.package-detail-text {
+    font-family: 'Abel', sans-serif;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
 .package-name {
     display: flex;
     text-align: center;
