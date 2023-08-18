@@ -28,6 +28,14 @@ const packages = [
         data_volta: "2023-08-22",
         details: "não gostei, asmei",
         image_url:"https://images.unsplash.com/photo-1630343350724-2eafe052719f?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=435&q=80"
+    },
+    {
+        id: 4,
+        name: "Nova Iorque",
+        data_ida: "2023-08-16",
+        data_volta: "2023-08-22",
+        details: "Concrete Jungles where dreams are made of...",
+        image_url:"https://images.unsplash.com/photo-1538970272646-f61fabb3a8a2?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=395&q=80"
     }
 ];
 
