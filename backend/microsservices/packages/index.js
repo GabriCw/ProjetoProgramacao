@@ -97,8 +97,8 @@ app.post("/create-package", (req, res) => {
 app.delete("/delete-package-by-id", (req, res) => {
     packages.forEach((value, index) => {
         if (parseInt(req.query.id) === value.id) {
-            res.json(value);
             packages.splice(index, 1);
+            res.status(200).send("Deletado com sucesso!");
             return;
         }
     })
@@ -129,7 +129,7 @@ app.put("/update-package-by-id", (req, res) => {
             value.data_volta = req.body.data_volta;
             value.details = req.body.details;
             value.image_url = req.body.image_url;
-            res.json(value);
+            res.status(200).send("Atualizado com sucesso!");
         }
     })
 })

@@ -6,6 +6,7 @@ import { FaTrash, FaPlaneArrival, FaPlaneDeparture} from 'react-icons/fa';
 import { AiOutlineClose } from 'react-icons/ai';
 import { GrUpdate } from 'react-icons/gr';
 import { BiSolidPencil } from 'react-icons/bi';
+import { toast } from "react-toastify";
 
 const HomePage = () => {
     
@@ -41,36 +42,35 @@ const HomePage = () => {
     
     
     const handleDelete = async (id) => {
-        try {
-            setPackageClicked(false);
-            const response = await deletePackageById(id);
-            setItemDeleted(!itemDeleted);
-            console.log(response);
-        } catch (error) {
-            console.error('Erro ao deletar o pacote:', error);
-        }
+        setPackageClicked(false);
+        const response = await deletePackageById(id);
+        setItemDeleted(!itemDeleted);
+        toast.success(response)
     };
 
     const handleSubmit = async (event) => {
-        event.preventDefault();
 
-        try {
-            const body = {
-                name: name,
-                data_ida: dataIda,
-                data_volta: dataVolta,
-                details: details,
-                image_url: imageUrl
-            }
-            const response = await updatePackageById(packageDetail.id, body);
-            console.log(response);
-            console.log(body);
-            setItemUpdated(!itemUpdated);
+        event.preventDefault();
+        const body = {
+            name: name,
+            data_ida: dataIda,
+            data_volta: dataVolta,
+            details: details,
+            image_url: imageUrl
+        }
+        const response = await updatePackageById(packageDetail.id, body);
+        console.log(response);
+        console.log(body);
+        setItemUpdated(!itemUpdated);
+        if(response.status === 200){
+            toast.success(response.data);
             setUpdateClicked(false);
             close();
-        } catch (error) {
-            console.error('Erro ao atualizar o pacote:', error);
         }
+        else{
+            toast.error(response.data);
+        }
+        
     };
     
     const close = () => setPackageClicked(false);

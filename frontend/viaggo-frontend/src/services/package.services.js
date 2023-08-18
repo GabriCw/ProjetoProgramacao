@@ -58,12 +58,9 @@ export const updatePackageById = async (id, newData) => {
 
     try {
         const response = await axios.put(_baseUrl + _endpoint, newData);
-
-        if (response.status === 200) {
-            return response.data;
-        }
+        return response
     } catch (error) {
-        return error.response.data;
+        return error.response;
     }
 };
 
