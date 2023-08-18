@@ -84,7 +84,7 @@ const HomePage = () => {
                             <div className="package-name">
                                 <span>{item.name}</span>
                             </div>
-                            <div className="date">
+                            <div className="date" id="date-text">
                                 <span><FaPlaneDeparture></FaPlaneDeparture>{item.data_ida}</span>
                                 <span><FaPlaneArrival></FaPlaneArrival>{item.data_volta}</span>
                             </div>

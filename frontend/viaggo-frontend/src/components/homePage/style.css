@@ -25,6 +25,10 @@
     border-radius: 15px;
 }
 
+.full-card:hover{
+    transform: scale(1.1);
+}
+
 .card-topic div {
     width: 300px;
     /* background-color: #ccc; */
@@ -34,6 +38,7 @@
 
 .full-card {
     display: flex;
+    transition-duration: .3s;
 }
 
 .package-detail-close-delete{
@@ -57,10 +62,12 @@
 
 .date {
     display: flex;
-    color: white;
+    color: rgb(255, 255, 255);
     align-items: center;
     padding: 5px;
+    font-size: 1.3em;
 }
+
 
 .package-image{
     position: absolute;
@@ -77,7 +84,7 @@
     color: white;
     font-family: 'Abel', sans-serif;
     font-weight: 900;
-    text-shadow: 6px 6px 8px black;
+    text-shadow: 7px 5px 10px black;
     
 }
 
@@ -90,6 +97,7 @@
     display: flex;
     padding: 5px;
     flex-direction: column;
+    font-family: 'Abel', sans-serif;
 }
 
 .form-item {
