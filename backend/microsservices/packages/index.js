@@ -128,6 +128,7 @@ app.put("/update-package-by-id", (req, res) => {
             value.data_ida = req.body.data_ida;
             value.data_volta = req.body.data_volta;
             value.details = req.body.details;
+            value.image_url = req.body.image_url;
             res.json(value);
         }
     })

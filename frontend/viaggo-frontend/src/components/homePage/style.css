@@ -68,7 +68,6 @@
     font-size: 1.3em;
 }
 
-
 .package-image{
     position: absolute;
 }
@@ -102,7 +101,6 @@
 
 .form-item {
     
-    /* display: flex; */
     justify-content: flex-start;
     margin-bottom: 20px;
 }

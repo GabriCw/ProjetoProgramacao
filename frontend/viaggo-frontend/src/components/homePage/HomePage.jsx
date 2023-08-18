@@ -20,6 +20,7 @@ const HomePage = () => {
     const [dataIda, setDataIda] = useState('');
     const [dataVolta, setDataVolta] = useState('');
     const [details, setDetails] = useState('');
+    const [imageUrl, setImageUrl] = useState('');
 
 
     useEffect(() => {
@@ -54,15 +55,19 @@ const HomePage = () => {
         event.preventDefault();
 
         try {
-            const response = await updatePackageById(packageDetail.id, {
+            const body = {
                 name: name,
                 data_ida: dataIda,
                 data_volta: dataVolta,
-                details: details
-            });
+                details: details,
+                image_url: imageUrl
+            }
+            const response = await updatePackageById(packageDetail.id, body);
             console.log(response);
+            console.log(body);
             setItemUpdated(!itemUpdated);
             setUpdateClicked(false);
+            close();
         } catch (error) {
             console.error('Erro ao atualizar o pacote:', error);
         }
@@ -148,7 +153,7 @@ const HomePage = () => {
                     <div className="form-item">
                         <label htmlFor="dataIda">Data de Ida:</label>
                         <input
-                            type="text"
+                            type="date"
                             id="dataIda"
                             value={dataIda}
                             onChange={(e) => setDataIda(e.target.value)}
@@ -157,7 +162,7 @@ const HomePage = () => {
                     <div className="form-item">
                         <label htmlFor="dataVolta">Data de Volta:</label>
                         <input
-                            type="text"
+                            type="date"
                             id="dataVolta"
                             value={dataVolta}
                             onChange={(e) => setDataVolta(e.target.value)}
@@ -171,10 +176,19 @@ const HomePage = () => {
                             onChange={(e) => setDetails(e.target.value)}
                         />
                     </div>
+                    <div className="form-item">
+                        <label htmlFor="image-url">Url Imagem:</label>
+                        <input
+                            id="image-url"
+                            value={imageUrl}
+                            onChange={(e) => setImageUrl(e.target.value)}
+                        />
+                    </div>
                     <button type="submit">Atualizar Pacote</button>
                 </form>
             </Box>
         </Modal>
+        
     </div>
 }
 
