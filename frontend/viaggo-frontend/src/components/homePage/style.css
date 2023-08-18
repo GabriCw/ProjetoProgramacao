@@ -17,7 +17,7 @@
 .card-topic div {
     display: flex;
     justify-content: center;
-    flex-direction: row;
+    flex-direction: column;
     gap: 20px;
     width: 100%;
     padding: 0;
@@ -32,6 +32,10 @@
     border-color: black;
 }
 
+.full-card {
+    display: flex;
+}
+
 .package-detail-close-delete{
     display: flex;
     justify-content: space-between;
@@ -40,11 +44,14 @@
 .package-name {
     display: flex;
     text-align: center;
-    font-size: 1.5em;
+    font-size: 2.75em;
 }
 
 .date {
     display: flex;
+    color: white;
+    align-items: center;
+    padding: 5px;
 }
 
 .package-image{
@@ -53,15 +60,16 @@
 
 .package-image img{
     border-radius: 10px;
-    box-shadow: 5px 5px 5px rgba(0, 0, 0, 0.258);
+    box-shadow: 6px 6px 7px rgba(0, 0, 0, 0.315);
 }
 
 .package-details{
+    display: flex;
     position: relative;
     color: white;
     font-family: 'Abel', sans-serif;
-    font-weight: bolder;
-    text-shadow: 4px 4px 3px rgba(0, 0, 0, 0.696);
+    font-weight: 900;
+    text-shadow: 6px 6px 8px black;
     
 }
 

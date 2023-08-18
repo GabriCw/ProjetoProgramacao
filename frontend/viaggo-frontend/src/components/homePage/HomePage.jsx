@@ -2,9 +2,10 @@ import { Box, Modal } from "@mui/material";
 import { useEffect, useState } from "react";
 import { getAllPackages, getPackageById, deletePackageById, updatePackageById } from "../../services/package.services";
 import "./style.css";
-import { FaTrash } from 'react-icons/fa';
+import { FaTrash, FaPlaneArrival, FaPlaneDeparture} from 'react-icons/fa';
 import { AiOutlineClose } from 'react-icons/ai';
 import { GrUpdate } from 'react-icons/gr';
+import { BiSolidPencil } from 'react-icons/bi';
 
 const HomePage = () => {
     
@@ -75,17 +76,17 @@ const HomePage = () => {
         <div className="card-topic">
             {
                 packages.map(item => {
-                    return <div onClick={() => handleClick(item.id)}>
+                    return <div onClick={() => handleClick(item.id)} className="full-card">
                             <div className="package-image">
                                 <img className="package-image" src={item.image_url} alt={`Package ${item.name} Image`} width={300} height={300}/>
                             </div>
                         <div className="package-details">
                             <div className="package-name">
-                                <p>{item.name}</p>
+                                <span>{item.name}</span>
                             </div>
                             <div className="date">
-                                <p>{item.data_ida}</p>
-                                <p>{item.data_volta}</p>
+                                <span><FaPlaneDeparture></FaPlaneDeparture>{item.data_ida}</span>
+                                <span><FaPlaneArrival></FaPlaneArrival>{item.data_volta}</span>
                             </div>
                         </div>
                     </div>
@@ -104,10 +105,10 @@ const HomePage = () => {
                     <AiOutlineClose
                         onClick={close}
                     ></AiOutlineClose>
-                    <GrUpdate
+                    <BiSolidPencil
                         onClick={() => setUpdateClicked(true)}
                     >
-                    </GrUpdate>
+                    </BiSolidPencil>
                     <FaTrash
                         onClick={() => handleDelete(packageDetail.id)}
                     ></FaTrash>
