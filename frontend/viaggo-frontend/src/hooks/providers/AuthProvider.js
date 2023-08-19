@@ -51,12 +51,6 @@ export const AuthProvider = ({ children }) => {
 
     const goToHome = () => navigate("/home");
 
-    const hasMfa = async (email) => {
-        const request = await verifyMfa(email);
-
-        console.log(request)
-    }
-
     return <AuthContext.Provider value={{ canLogin, loginUsed, auth, goToHome, goToForgotPassword, goToRegister }}>
         {children}
     </AuthContext.Provider>
