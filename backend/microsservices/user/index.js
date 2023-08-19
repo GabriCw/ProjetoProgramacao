@@ -169,6 +169,7 @@ app.get("/verify-mfa", (req, res) => {
 
     if (req.query.login === '' || req.query.login === null) {
         res.status(400).send("E-mail inválido");
+        return;
     }
 
     const search = users.find(user => (user.email === req.query.login || user.cpf === req.query.login) && user.mfa);
@@ -187,19 +188,19 @@ app.post("/generate-code", (req, res) => {
     var maxm = 999999;
     const number = Math.floor(Math.random() * (maxm - minm + 1)) + minm;
 
-    if (parseInt(req.query.id) === 0 || parseInt(req.query.id) === -1 || req.query.id === undefined) {
-        res.status(400).send("ID inválido");
+    if (req.body.login === '' || req.body.login === null) {
+        res.status(400).send("E-mail inválido");
         return;
     }
 
-    const verifyValidId = users.find(user => user.id === parseInt(req.query.id));
+    const verifyValidUser = users.find(user => user.email === req.body.login || user.cpf === req.body.login);
 
-    if (!verifyValidId) {
+    if (!verifyValidUser) {
         res.status(400).send("ID não existe");
         return;
     }
 
-    const verifyHasMfa = users.find(user => user.mfa && user.id === verifyValidId.id);
+    const verifyHasMfa = users.find(user => user.mfa && user.id === verifyValidUser.id);
 
     if (!verifyHasMfa) {
         res.status(400).send("Não há dupla autenticação para este usuário");
@@ -207,7 +208,7 @@ app.post("/generate-code", (req, res) => {
     }
 
     const newMfaCode = {
-        user_id: parseInt(req.query.id),
+        user_id: verifyValidUser.id,
         code: number,
         expiration_date: moment().add(5, 'minutes').subtract(3, 'hours')
     };

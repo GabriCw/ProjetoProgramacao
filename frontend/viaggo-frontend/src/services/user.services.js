@@ -28,8 +28,8 @@ export const registerUser = async (data) => {
     }
 }
 
-export const verifyMfa = async (email) => {
-    const _endpoint = `/verify-mfa?login=${email}`;
+export const verifyMfa = async (login) => {
+    const _endpoint = `/verify-mfa?login=${login}`;
     try {
         const response = await axios.get(_baseUrl + _endpoint);
 
@@ -40,5 +40,17 @@ export const verifyMfa = async (email) => {
     }
     catch (error) {
         return error.response.data;
+    }
+}
+
+export const generateCode = async (body) => {
+    const _endpoint = "/generate-code";
+    try {
+        const response = await axios.post(_baseUrl + _endpoint, body);
+
+        return response;
+    }
+    catch (error) {
+        return error.response;
     }
 }

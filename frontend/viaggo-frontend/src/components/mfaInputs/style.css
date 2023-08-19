@@ -63,6 +63,12 @@ section.login-container2 {
     color: #000;
 }
 
+.input-container2 .input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
 ::placeholder {
     color: #004071;
     opacity: 1;
