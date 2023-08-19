@@ -54,3 +54,15 @@ export const generateCode = async (body) => {
         return error.response;
     }
 }
+
+export const authCode = async (body) => {
+    const _endpoint = "/auth-code";
+    try {
+        const response = await axios.post(_baseUrl + _endpoint, body);
+
+        return response;
+    }
+    catch (error) {
+        return error.response;
+    }
+}

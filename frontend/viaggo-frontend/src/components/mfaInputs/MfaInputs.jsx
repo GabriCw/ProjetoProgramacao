@@ -1,14 +1,14 @@
 import { useEffect, useState } from "react";
 import { toast } from "react-toastify";
 import { useAuth } from "../../hooks/providers/AuthProvider";
-import { generateCode } from "../../services/user.services";
+import { authCode, generateCode } from "../../services/user.services";
 import "./style.css";
 
 const MfaInputs = () => {
 
     const [number, setNumber] = useState(0);
 
-    const { loginUsed } = useAuth();
+    const { loginUsed, goToHome } = useAuth();
 
     useEffect(() => {
         console.log(typeof (number))
@@ -32,6 +32,24 @@ const MfaInputs = () => {
         }
     }
 
+    const handleConfirmCode = async (event) => {
+        event.preventDefault();
+
+        const body = {
+            code: number
+        }
+
+        const request = await authCode(body);
+
+        if (request.status === 200) {
+            goToHome()
+        }
+
+        else {
+            toast.error(request.data);
+        }
+    }
+
     return <>
         <header className="titles-container">
             <h1 className="welcome-title">INSIRA SEU CÓDIGO</h1>
@@ -47,7 +65,7 @@ const MfaInputs = () => {
                 </div>
             </section>
             <div className="button-container2">
-                <button className="button-login">CONFIRMAR</button>
+                <button className="button-login" onClick={handleConfirmCode}>CONFIRMAR</button>
             </div>
         </form>
     </>

@@ -6,6 +6,7 @@ const defaultContext = {
     canLogin: null,
     loginUsed: "",
     auth: (data) => { },
+    goToHome: () => { },
     goToForgotPassword: () => { },
     goToRegister: () => { }
 };
@@ -43,13 +44,15 @@ export const AuthProvider = ({ children }) => {
 
     const goToRegister = () => navigate("/register");
 
+    const goToHome = () => navigate("/home");
+
     const hasMfa = async (email) => {
         const request = await verifyMfa(email);
 
         console.log(request)
     }
 
-    return <AuthContext.Provider value={{ canLogin, loginUsed, auth, goToForgotPassword, goToRegister }}>
+    return <AuthContext.Provider value={{ canLogin, loginUsed, auth, goToHome, goToForgotPassword, goToRegister }}>
         {children}
     </AuthContext.Provider>
 };
