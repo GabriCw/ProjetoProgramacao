@@ -5,7 +5,6 @@ import { login, verifyMfa } from "../../services/user.services";
 const defaultContext = {
     canLogin: null,
     auth: (data) => { },
-    hasMfa: (login) => { },
     goToForgotPassword: () => { },
     goToRegister: () => { }
 };
@@ -22,8 +21,15 @@ export const AuthProvider = ({ children }) => {
 
         const request = await login(data);
 
+        const hasMfa = await verifyMfa(data.login);
+
         if (request === true) {
-            navigate("/home");
+            if (hasMfa === true) {
+                navigate("/mfa");
+            }
+            else {
+                navigate("/home");
+            }
         }
 
         setCanLogin(request);
@@ -39,7 +45,7 @@ export const AuthProvider = ({ children }) => {
         console.log(request)
     }
 
-    return <AuthContext.Provider value={{ canLogin, auth, hasMfa, goToForgotPassword, goToRegister }}>
+    return <AuthContext.Provider value={{ canLogin, auth, goToForgotPassword, goToRegister }}>
         {children}
     </AuthContext.Provider>
 };

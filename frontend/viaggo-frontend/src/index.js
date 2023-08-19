@@ -9,6 +9,7 @@ import ForgotPasswordView from './views/forgotPasswordView/ForgotPasswordView';
 import HomePageView from './views/homePageView/HomePageView';
 import InsertCodeView from './views/insertCodeView/insertCodeView';
 import LoginView from './views/loginView/LoginView';
+import MfaView from './views/mfaView/MfaView';
 import NewPasswordView from './views/newPasswordView/newPasswordView';
 import RegisterView from './views/registerView/RegisterView';
 
@@ -19,6 +20,7 @@ root.render(
       <Routes>
         <Route index element={<LoginView />} />
         <Route path="login" element={<LoginView />} />
+        <Route path="mfa" element={<MfaView />} />
         <Route path="register" element={<RegisterView />} />
         <Route path="forgotPassword" element={<ForgotPasswordView />} />
         <Route path="home" element={<HomePageView />} />
