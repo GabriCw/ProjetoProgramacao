@@ -1,10 +1,13 @@
 const express = require("express");
 const cors = require("cors");
+const moment = require("moment/moment");
 const app = express();
 const port = 5000;
 app.use(express.json());
 
 app.use(cors());
+
+moment.locale('br');
 
 //DATA
 const users = [
@@ -13,21 +16,39 @@ const users = [
         name: "Davi",
         email: "dav@gmail.com",
         cpf: "11122233344",
-        password: "batata123"
+        password: "batata123",
+        mfa: true
     },
     {
         id: 2,
         name: "Gabriel",
         email: "gab@gmail.com",
         cpf: "55566677789",
-        password: "baaasada"
+        password: "baaasada",
+        mfa: false
     },
     {
         id: 3,
         name: "Felipe",
         email: "lip@gmail.com",
         cpf: "52100029312",
-        password: "arregacamoleza"
+        password: "arregacamoleza",
+        mfa: false
+    }
+];
+
+const mfa_user = [
+    {
+        user_id: 1,
+        code: 123456,
+        expiration_date: moment("2023-07-19T23:59:59"),
+        used: true,
+    },
+    {
+        user_id: 1,
+        code: 123123,
+        expiration_date: moment("2025-08-19T23:59:59"),
+        used: false,
     }
 ];
 
@@ -44,7 +65,7 @@ const handlePassword = (input) => {
 //GET ALL
 app.get("/get-all-users", (req, res) => {
     res.json(users);
-})
+});
 
 //GET USER BY ID
 app.get("/get-user-by-id", (req, res) => {
@@ -55,7 +76,7 @@ app.get("/get-user-by-id", (req, res) => {
         }
     })
     res.status(400).send("ID inválido")
-})
+});
 
 //CREATE USER
 app.post("/create-user", (req, res) => {
@@ -98,7 +119,7 @@ app.post("/create-user", (req, res) => {
     };
     users.push(newUser);
     res.json(newUser);
-})
+});
 
 //DELETE USER BY ID
 app.delete("/delete-user-by-id", (req, res) => {
@@ -110,7 +131,7 @@ app.delete("/delete-user-by-id", (req, res) => {
         }
     })
     res.status(400).send("ID inválido");
-})
+});
 
 //UPDATE USER BY ID -> CPF e ID não mudam
 app.put("/update-user-by-id", (req, res) => {
@@ -127,7 +148,7 @@ app.put("/update-user-by-id", (req, res) => {
             res.json(value);
         }
     })
-})
+});
 
 //LOGIN
 app.post("/login", (req, res) => {
@@ -138,7 +159,88 @@ app.post("/login", (req, res) => {
         }
     })
     res.status(400).send("Preencha os campos corretamente");
-})
+});
+
+//GET ALL MFA-USER
+app.get("/get-mfa-user", (req, res) => {
+    res.json(mfa_user);
+});
+
+//VERIFY IF HAS MFA
+app.get("/verify-mfa", (req, res) => {
+
+    if (req.query.login === '' || req.query.login === null) {
+        res.status(400).send("E-mail inválido");
+        return;
+    }
+
+    const search = users.find(user => (user.email === req.query.login || user.cpf === req.query.login) && user.mfa);
+
+    if (!search) {
+        res.status(400).send(false);
+        return;
+    };
+
+    res.status(200).send(true);
+});
+
+//GENERATING MFA CODE
+app.post("/generate-code", (req, res) => {
+    var minm = 100000;
+    var maxm = 999999;
+    const number = Math.floor(Math.random() * (maxm - minm + 1)) + minm;
+
+    if (req.body.login === '' || req.body.login === null) {
+        res.status(400).send("E-mail inválido");
+        return;
+    }
+
+    const verifyValidUser = users.find(user => user.email === req.body.login || user.cpf === req.body.login);
+
+    if (!verifyValidUser) {
+        res.status(400).send("ID não existe");
+        return;
+    }
+
+    const verifyHasMfa = users.find(user => user.mfa && user.id === verifyValidUser.id);
+
+    if (!verifyHasMfa) {
+        res.status(400).send("Não há dupla autenticação para este usuário");
+        return;
+    }
+
+    const newMfaCode = {
+        user_id: verifyValidUser.id,
+        code: number,
+        expiration_date: moment().add(5, 'minutes').subtract(3, 'hours'),
+        used: false,
+    };
+
+    mfa_user.push(newMfaCode);
+
+    res.status(200).send("Código gerado com sucesso!");
+});
+
+//AUTHENTICATION CODE
+app.post("/auth-code", (req, res) => {
+    if (req.body.code === '' || req.body.code === null) {
+        res.status(400).send("Código inválido");
+        return;
+    }
+
+    const dateNow = moment().subtract(3, 'hours');
+
+    const verifyCode = mfa_user.find(mfa => mfa.code === parseInt(req.body.code) && dateNow <= mfa.expiration_date && !mfa.used);
+
+    if (!verifyCode) {
+        res.status(400).send("Código inválido");
+        return;
+    }
+
+    verifyCode.used = true;
+
+    res.status(200).send("Autenticação feita com sucesso!");
+});
 
 app.listen(port, () => {
     console.log(`Example app listening on port ${port}`);
