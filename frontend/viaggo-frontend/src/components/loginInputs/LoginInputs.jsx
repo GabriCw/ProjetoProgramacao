@@ -1,16 +1,17 @@
 import { Visibility, VisibilityOff } from "@mui/icons-material";
 import { useEffect, useState } from "react";
-import { toast } from "react-toastify";
-import { login, verifyMfa } from "../../services/user.services";
+import { useAuth } from "../../hooks/providers/AuthProvider";
 import "./style.css";
 
-const LoginInputs = ({ canLogin, goToForgotPassword, goToRegister }) => {
+const LoginInputs = ({ goToForgotPassword, goToRegister }) => {
 
     const [isPasswordVisible, setIsPasswordVisible] = useState(false);
     const [typePasswordInput, setTypePasswordInput] = useState("password");
 
     const [loginInput, setLoginInput] = useState('')
     const [passwordInput, setPasswordInput] = useState('')
+
+    const { auth } = useAuth();
 
     const handleLogin = async (event) => {
         event.preventDefault();
@@ -20,15 +21,8 @@ const LoginInputs = ({ canLogin, goToForgotPassword, goToRegister }) => {
             password: passwordInput
         };
 
-        const isPermitted = await login(data);
+        auth(data);
 
-        const verify = await verifyMfa(loginInput);
-
-        canLogin(isPermitted);
-
-        if (isPermitted !== true) {
-            toast.error(isPermitted);
-        }
     }
 
     const handlePasswordVisibility = () => {
