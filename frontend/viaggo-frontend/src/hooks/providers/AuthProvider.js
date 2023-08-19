@@ -1,6 +1,6 @@
 import { createContext, useContext, useState } from "react";
 import { useNavigate } from "react-router";
-import { login, verifyMfa } from "../../services/user.services";
+import { generateCode, login, verifyMfa } from "../../services/user.services";
 
 const defaultContext = {
     canLogin: null,
@@ -19,6 +19,11 @@ export const AuthProvider = ({ children }) => {
 
     const navigate = useNavigate();
 
+    const handleMfa = async (login) => {
+        navigate("/mfa");
+        await generateCode({ login });
+    }
+
     const auth = async (data) => {
         setCanLogin(null);
 
@@ -30,7 +35,7 @@ export const AuthProvider = ({ children }) => {
 
         if (request === true) {
             if (hasMfa === true) {
-                navigate("/mfa");
+                handleMfa(data.login);
             }
             else {
                 navigate("/home");

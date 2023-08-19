@@ -78,6 +78,23 @@ input::-webkit-inner-spin-button {
     color: #004071;
 }
 
+.button-generate-code {
+    font-family: 'Abel', sans-serif;
+    border-radius: 25px;
+    background-color: #74cfc7;
+    color: #fff;
+    border: none;
+    font-size: 1.2rem;
+    margin-top: 1vh;
+    padding: .5vw;
+    cursor: pointer;
+    transition: all 0.2s ease-in;
+}
+
+.button-generate-code:hover {
+    transform: scale(1.05);
+}
+
 .button-container2 {
     width: 100%;
     margin-top: 100px;
