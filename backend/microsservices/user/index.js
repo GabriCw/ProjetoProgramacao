@@ -41,12 +41,14 @@ const mfa_user = [
     {
         user_id: 1,
         code: 123456,
-        expiration_date: moment("2023-07-19T23:59:59")
+        expiration_date: moment("2023-07-19T23:59:59"),
+        used: true,
     },
     {
         user_id: 1,
         code: 123123,
-        expiration_date: moment("2025-08-19T23:59:59")
+        expiration_date: moment("2025-08-19T23:59:59"),
+        used: false,
     }
 ];
 
@@ -210,7 +212,8 @@ app.post("/generate-code", (req, res) => {
     const newMfaCode = {
         user_id: verifyValidUser.id,
         code: number,
-        expiration_date: moment().add(5, 'minutes').subtract(3, 'hours')
+        expiration_date: moment().add(5, 'minutes').subtract(3, 'hours'),
+        used: false,
     };
 
     mfa_user.push(newMfaCode);
@@ -227,12 +230,14 @@ app.post("/auth-code", (req, res) => {
 
     const dateNow = moment().subtract(3, 'hours');
 
-    const verifyCode = mfa_user.find(mfa => mfa.code === parseInt(req.body.code) && dateNow <= mfa.expiration_date);
+    const verifyCode = mfa_user.find(mfa => mfa.code === parseInt(req.body.code) && dateNow <= mfa.expiration_date && !mfa.used);
 
     if (!verifyCode) {
         res.status(400).send("Código inválido");
         return;
     }
+
+    verifyCode.used = true;
 
     res.status(200).send("Autenticação feita com sucesso!");
 });

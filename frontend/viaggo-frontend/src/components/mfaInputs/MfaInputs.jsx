@@ -57,12 +57,16 @@ const MfaInputs = () => {
         }
 
         time();
+
+        console.log("Para saber qual token utilizar, rode: ")
+        console.log("(GET) 'http://localhost:5000/get-mfa-user' - sem query/body")
     }, []);
 
     return <>
         <header className="titles-container">
             <h1 className="welcome-title">DUPLA AUTENTICAÇÃO</h1>
             <h2 className="title">INSIRA O CÓDIGO PARA PROSSEGUIR</h2>
+            <p>(Para saber o código, abra o console)</p>
         </header>
         <form>
             <section className="login-container2">
