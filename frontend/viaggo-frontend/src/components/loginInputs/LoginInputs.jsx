@@ -3,7 +3,7 @@ import { useEffect, useState } from "react";
 import { useAuth } from "../../hooks/providers/AuthProvider";
 import "./style.css";
 
-const LoginInputs = ({ goToForgotPassword, goToRegister }) => {
+const LoginInputs = () => {
 
     const [isPasswordVisible, setIsPasswordVisible] = useState(false);
     const [typePasswordInput, setTypePasswordInput] = useState("password");
@@ -11,7 +11,7 @@ const LoginInputs = ({ goToForgotPassword, goToRegister }) => {
     const [loginInput, setLoginInput] = useState('')
     const [passwordInput, setPasswordInput] = useState('')
 
-    const { auth } = useAuth();
+    const { auth, goToForgotPassword, goToRegister } = useAuth();
 
     const handleLogin = async (event) => {
         event.preventDefault();
@@ -22,7 +22,6 @@ const LoginInputs = ({ goToForgotPassword, goToRegister }) => {
         };
 
         auth(data);
-
     }
 
     const handlePasswordVisibility = () => {

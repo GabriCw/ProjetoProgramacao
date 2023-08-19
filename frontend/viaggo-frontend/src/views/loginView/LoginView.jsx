@@ -18,10 +18,7 @@ const LoginView = () => {
 
 
     return <Card>
-        <LoginInputs
-            goToForgotPassword={() => navigate('/forgotPassword')}
-            goToRegister={() => navigate('/register')}
-        />
+        <LoginInputs />
     </Card>
 }
 
