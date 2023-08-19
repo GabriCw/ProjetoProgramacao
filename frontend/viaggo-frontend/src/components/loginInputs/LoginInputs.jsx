@@ -1,8 +1,8 @@
 import { Visibility, VisibilityOff } from "@mui/icons-material";
 import { useEffect, useState } from "react";
-import { login } from "../../services/user.services";
-import "./style.css";
 import { toast } from "react-toastify";
+import { login, verifyMfa } from "../../services/user.services";
+import "./style.css";
 
 const LoginInputs = ({ canLogin, goToForgotPassword, goToRegister }) => {
 
@@ -18,13 +18,16 @@ const LoginInputs = ({ canLogin, goToForgotPassword, goToRegister }) => {
         const data = {
             login: loginInput,
             password: passwordInput
-        }
+        };
 
         const isPermitted = await login(data);
-        canLogin(isPermitted === true)
+
+        const verify = await verifyMfa(loginInput);
+
+        canLogin(isPermitted);
 
         if (isPermitted !== true) {
-            toast.error(isPermitted)
+            toast.error(isPermitted);
         }
     }
 

@@ -167,11 +167,11 @@ app.get("/get-mfa-user", (req, res) => {
 //VERIFY IF HAS MFA
 app.get("/verify-mfa", (req, res) => {
 
-    if (parseInt(req.query.id) === 0 || parseInt(req.query.id) === -1 || req.query.id === undefined || req.query.id === "") {
-        res.status(400).send("ID inválido");
+    if (req.query.login === '' || req.query.login === null) {
+        res.status(400).send("E-mail inválido");
     }
 
-    const search = users.find(user => user.id === parseInt(req.query.id) && user.mfa);
+    const search = users.find(user => (user.email === req.query.login || user.cpf === req.query.login) && user.mfa);
 
     if (!search) {
         res.status(400).send(false);

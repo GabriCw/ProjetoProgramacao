@@ -27,3 +27,18 @@ export const registerUser = async (data) => {
         return error.response.data;
     }
 }
+
+export const verifyMfa = async (email) => {
+    const _endpoint = `/verify-mfa?login=${email}`;
+    try {
+        const response = await axios.get(_baseUrl + _endpoint);
+
+        if (response.status === 200) {
+            return response.data;
+        }
+
+    }
+    catch (error) {
+        return error.response.data;
+    }
+}
