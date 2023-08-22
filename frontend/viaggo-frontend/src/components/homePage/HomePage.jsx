@@ -128,6 +128,8 @@ const HomePage = () => {
             </Box>
         </Modal>
         
+        
+
         <Modal
             open={updateClicked}
             onClose={closeUpdate}
@@ -184,7 +186,7 @@ const HomePage = () => {
                             onChange={(e) => setImageUrl(e.target.value)}
                         />
                     </div>
-                    <button type="submit">Atualizar Pacote</button>
+                    <button type="submit" className="update-button">Atualizar Pacote</button>
                 </form>
             </Box>
         </Modal>

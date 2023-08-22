@@ -10,6 +10,7 @@ const RegisterInputs = ({ goToLogin }) => {
     const [isPasswordVisible, setIsPasswordVisible] = useState(false);
     const [typePasswordInput, setTypePasswordInput] = useState("password");
     const [click, setClick] = useState(false);
+    const [isChecked, setIsChecked] = useState(false);
 
     const [nameInput, setNameInput] = useState('')
     const [emailInput, setEmailInput] = useState('')
@@ -42,6 +43,10 @@ const RegisterInputs = ({ goToLogin }) => {
         setIsPasswordVisible(!isPasswordVisible);
     }
     
+    const handleCheckboxChange = () =>{
+        setIsChecked(!isChecked);
+    }
+
     useEffect(() => {
         if (isPasswordVisible)
             setTypePasswordInput("text");
@@ -83,6 +88,16 @@ const RegisterInputs = ({ goToLogin }) => {
                             }
                         </div>
                     </div>
+                    <label className="checkbox-dupla-autenticacao">
+                        <div className="input-block">
+                            <input
+                            type="checkbox"
+                            checked={isChecked}
+                            onChange={handleCheckboxChange}
+                            />
+                        </div>
+                        <div className="checkbox-text">DESEJO UTILIZAR DUPLA AUTENTICAÇÃO</div>
+                    </label>
                 </div>
             </section>
             <div className="button-container3">
