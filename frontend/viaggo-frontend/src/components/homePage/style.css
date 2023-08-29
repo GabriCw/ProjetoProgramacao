@@ -120,3 +120,14 @@
     color: grey;
     cursor: pointer;
 }
+
+.details-item{
+    display: flex;
+    /* padding-inline: 10px; */
+    align-items: center;
+}
+#details{
+    color: #004071;
+    width: 100%;
+    margin-left: 10px;
+}
