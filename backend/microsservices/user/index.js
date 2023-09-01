@@ -115,7 +115,8 @@ app.post("/create-user", (req, res) => {
         name: req.body.name,
         email: req.body.email,
         cpf: req.body.cpf,
-        password: req.body.password
+        password: req.body.password,
+        mfa: req.body.mfa
     };
     users.push(newUser);
     res.json(newUser);

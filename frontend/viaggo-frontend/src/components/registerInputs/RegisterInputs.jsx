@@ -16,6 +16,7 @@ const RegisterInputs = ({ goToLogin }) => {
     const [emailInput, setEmailInput] = useState('')
     const [cpfInput, setCpfInput] = useState('')
     const [passwordInput, setPasswordInput] = useState('')
+    const [isMfaChecked, setMfaChecked] = useState(false)
     const [focus, setFocus] = useState(false)
     const [placeholder, setPlaceholder] = useState('SENHA')
 
@@ -26,7 +27,8 @@ const RegisterInputs = ({ goToLogin }) => {
             name: nameInput,
             email: emailInput,
             cpf: cpfInput,
-            password: passwordInput
+            password: passwordInput,
+            mfa: isMfaChecked
         }
 
         const createUser = await registerUser(credenciais);
@@ -45,6 +47,7 @@ const RegisterInputs = ({ goToLogin }) => {
     
     const handleCheckboxChange = () =>{
         setIsChecked(!isChecked);
+        setMfaChecked(!isMfaChecked);
     }
 
     useEffect(() => {
