@@ -7,6 +7,12 @@ app.use(express.json());
 
 app.use(cors());
 
+// app.use((req, res, next) => {
+//     res.setHeader('Access-Control-Allow-Origin', '*');
+//     next();
+// });  Validar se realmente corrige o bug do CORS
+
+
 moment.locale('br');
 
 //DATA
@@ -168,7 +174,8 @@ app.get("/get-mfa-user", (req, res) => {
 
 //VERIFY IF HAS MFA
 app.get("/verify-mfa", (req, res) => {
-
+    
+    //('Access-Control-Allow-Credentials', true);
     if (req.query.login === '' || req.query.login === null) {
         res.status(400).send("E-mail inválido");
         return;
@@ -227,7 +234,7 @@ app.post("/auth-code", (req, res) => {
         res.status(400).send("Código inválido");
         return;
     }
-
+    
     const dateNow = moment().subtract(3, 'hours');
 
     const verifyCode = mfa_user.find(mfa => mfa.code === parseInt(req.body.code) && dateNow <= mfa.expiration_date && !mfa.used);
