@@ -28,4 +28,4 @@
     - git push origin nome
 #
 ## Vídeo Apresentando Site
-    - [ViagGo! - Clique Aqui](https://youtu.be/q1GHQPP-UVc) 
+[ViagGo! - Clique Aqui](https://youtu.be/q1GHQPP-UVc) 
