@@ -10,11 +10,13 @@ const RegisterInputs = ({ goToLogin }) => {
     const [isPasswordVisible, setIsPasswordVisible] = useState(false);
     const [typePasswordInput, setTypePasswordInput] = useState("password");
     const [click, setClick] = useState(false);
+    const [isChecked, setIsChecked] = useState(false);
 
     const [nameInput, setNameInput] = useState('')
     const [emailInput, setEmailInput] = useState('')
     const [cpfInput, setCpfInput] = useState('')
     const [passwordInput, setPasswordInput] = useState('')
+    const [isMfaChecked, setMfaChecked] = useState(false)
     const [focus, setFocus] = useState(false)
     const [placeholder, setPlaceholder] = useState('SENHA')
 
@@ -25,7 +27,8 @@ const RegisterInputs = ({ goToLogin }) => {
             name: nameInput,
             email: emailInput,
             cpf: cpfInput,
-            password: passwordInput
+            password: passwordInput,
+            mfa: isMfaChecked
         }
 
         const createUser = await registerUser(credenciais);
@@ -42,6 +45,11 @@ const RegisterInputs = ({ goToLogin }) => {
         setIsPasswordVisible(!isPasswordVisible);
     }
     
+    const handleCheckboxChange = () =>{
+        setIsChecked(!isChecked);
+        setMfaChecked(!isMfaChecked);
+    }
+
     useEffect(() => {
         if (isPasswordVisible)
             setTypePasswordInput("text");
@@ -83,6 +91,16 @@ const RegisterInputs = ({ goToLogin }) => {
                             }
                         </div>
                     </div>
+                    <label className="checkbox-dupla-autenticacao">
+                        <div className="input-block">
+                            <input
+                            type="checkbox"
+                            checked={isChecked}
+                            onChange={handleCheckboxChange}
+                            />
+                        </div>
+                        <div className="checkbox-text">DESEJO UTILIZAR DUPLA AUTENTICAÇÃO</div>
+                    </label>
                 </div>
             </section>
             <div className="button-container3">

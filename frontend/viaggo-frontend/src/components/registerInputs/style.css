@@ -144,7 +144,7 @@ section.login-container {
 
 .button-container3 {
   width: 100%;
-  margin-top: 48.6px;
+  margin-top: 20px;
   display: flex;
   justify-content: center;
 }
@@ -158,4 +158,19 @@ section.login-container {
   color: #fff;
   border: none;
   font-size: 1.8rem;
+}
+
+.checkbox-dupla-autenticacao{
+  display: flex;
+}
+
+.input-block{
+  margin-right: 10px;
+}
+
+.checkbox-text{
+  display: flex;
+  align-items: center;
+  color: #004071;
+  font-family: 'Abel', sans-serif;
 }
