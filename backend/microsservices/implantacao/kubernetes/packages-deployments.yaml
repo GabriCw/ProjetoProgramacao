@@ -1,0 +1,21 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: packages-deployment
+spec: 
+  replicas: 1 # Quantas cópias
+  selector: 
+    matchLabels:
+      app: packages
+  template:
+    metadata: 
+      labels: 
+        app: packages
+    spec:
+      containers: 
+        - name: packages
+          image: jonathanmgomes/projeto-packages
+           resources:
+             limits:
+               memory: 256Mi
+               cpu: 1
