@@ -7,14 +7,18 @@ import 'package:flutter/material.dart';
 class Bloc with Validators {
   final _emailController = BehaviorSubject<String>();
   final _passwordController = BehaviorSubject<String>();
-  var isObscure = BehaviorSubject();
+  final _isObscureController = BehaviorSubject<bool>.seeded(true);
 
   Stream<String> get email => _emailController.stream.transform(validate_Email);
-  Stream<String> get password =>
+  Stream<String> get password => 
       _passwordController.stream.transform(validate_Password);
   Stream<bool> get emailAndPasswordAreOk =>
       CombineLatestStream.combine2(email, password, (e, p) => true);
-  void get pisObscure => isObscure.sink.add(true);
+  
+  // Possível causa de erro!
+  Stream<bool> get isObscure => _isObscureController.stream;
+  Stream<bool> get passwordOrisObscure => CombineLatestStream.combine2(password, isObscure, (p, o) => true) ;
+  bool get isObscureValue => _isObscureController.value;
 
   void submitForm(BuildContext context) {
     final email = _emailController.value;
@@ -24,7 +28,7 @@ class Bloc with Validators {
 
   Function(String) get changeEmail => _emailController.sink.add;
   Function(String) get changePassword => _passwordController.sink.add;
-  void get changeState => isObscure.sink.add(!isObscure.value);
+  void get changeState => _isObscureController.sink.add(!_isObscureController.value);
 
   void dispose() {
     _emailController.close();

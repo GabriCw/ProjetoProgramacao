@@ -43,9 +43,6 @@ class LoginTela extends StatelessWidget {
   }
 
   Widget passwordField(Bloc bloc) {
-    // var ps = true;
-    // print(ps);
-    bloc.pisObscure;
     return StreamBuilder(
       stream: bloc.password,
       builder: (context, AsyncSnapshot<String> snapshot) => TextField(
@@ -59,13 +56,13 @@ class LoginTela extends StatelessWidget {
                 : snapshot.error.toString(),
             suffixIcon: IconButton(
                 icon: Icon(
-                    bloc.isObscure.value ? Icons.visibility : Icons.visibility_off),
+                    bloc.isObscureValue ? Icons.visibility : Icons.visibility_off),
                 onPressed: () {
-                  print(bloc.isObscure.valueOrNull);
+                  // print(bloc.isObscure);
                   bloc.changeState;
-                  print(bloc.isObscure.valueOrNull);
+                  // print(bloc.isObscure);
                 })),
-        obscureText: bloc.isObscure.value,
+        obscureText: bloc.isObscureValue,
       ),
     );
     // return TextField(
