@@ -69,11 +69,11 @@ class _HomeScreenState extends State<HomeScreen>
   void didPushAfterTransition() => _loadingController!.forward();
 
   AppBar _buildAppBar(ThemeData theme) {
-    final menuBtn = IconButton(
-      color: theme.colorScheme.secondary,
-      icon: const Icon(FontAwesomeIcons.bars),
-      onPressed: () {},
-    );
+    // final menuBtn = IconButton(
+    //   color: theme.colorScheme.secondary,
+    //   icon: const Icon(FontAwesomeIcons.bars),
+    //   onPressed: () {},
+    // );
     final signOutBtn = IconButton(
       icon: const Icon(FontAwesomeIcons.rightFromBracket),
       color: theme.colorScheme.secondary,
@@ -90,28 +90,27 @@ class _HomeScreenState extends State<HomeScreen>
               child: Image.asset(
                 '../assets/logo.png',
                 filterQuality: FilterQuality.high,
-                height: 30,
+                height: 70,
               ),
             ),
           ),
-          HeroText(
-            Constants.appName,
-            tag: Constants.titleTag,
-            viewState: ViewState.shrunk,
-            style: LoginThemeHelper.loginTextStyle,
-          ),
-          const SizedBox(width: 20),
+          // HeroText(
+          //   Constants.appName,
+          //   tag: Constants.titleTag,
+          //   viewState: ViewState.shrunk,
+          //   style: LoginThemeHelper.loginTextStyle,
+          // ),
         ],
       ),
     );
 
     return AppBar(
-      leading: FadeIn(
-        controller: _loadingController,
-        offset: .3,
-        curve: headerAniInterval,
-        child: menuBtn,
-      ),
+      // leading: FadeIn(
+      //   controller: _loadingController,
+      //   offset: .3,
+      //   curve: headerAniInterval,
+      //   child: menuBtn,
+      // ),
       actions: <Widget>[
         FadeIn(
           controller: _loadingController,
@@ -165,8 +164,8 @@ class _HomeScreenState extends State<HomeScreen>
       crossAxisCount: 3,
       children: [
         _buildButton(
-            icon: const Icon(FontAwesomeIcons.user),
-            label: 'Profile',
+            icon: const Icon(FontAwesomeIcons.planeDeparture),
+            label: 'Paris',
             interval: const Interval(0, aniInterval),
             onPressed: () {
               print('Teste01');
@@ -177,18 +176,18 @@ class _HomeScreenState extends State<HomeScreen>
               padding: const EdgeInsets.only(left: 16.0),
               alignment: Alignment.centerLeft,
               child: const Icon(
-                FontAwesomeIcons.moneyBill1,
+                FontAwesomeIcons.plane,
                 size: 20,
               ),
             ),
-            label: 'Fund Transfer',
+            label: 'Rio de Janeiro',
             interval: const Interval(step, aniInterval + step),
             onPressed: () {
               print('Teste02');
             }),
         _buildButton(
-            icon: const Icon(FontAwesomeIcons.handHoldingDollar),
-            label: 'Payment',
+            icon: const Icon(FontAwesomeIcons.planeArrival),
+            label: 'Nova York',
             interval: const Interval(step * 2, aniInterval + step * 2),
             onPressed: () {
               print('Teste03');
@@ -249,10 +248,10 @@ class _HomeScreenState extends State<HomeScreen>
                             begin: Alignment.topLeft,
                             end: Alignment.bottomRight,
                             colors: <Color>[
-                              Colors.deepPurpleAccent.shade100,
-                              Colors.deepPurple.shade100,
-                              Colors.deepPurple.shade100,
-                              Colors.deepPurple.shade100,
+                              Colors.white,
+                              Colors.white,
+                              Colors.white,
+                              Colors.white,
                               // Colors.red,
                               // Colors.yellow,
                             ],
