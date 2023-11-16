@@ -2,90 +2,15 @@ import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart' show timeDilation;
 import 'package:flutter_login/flutter_login.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import './constants.dart';
-import './users.dart';
-// import '../blocs/bloc.dart';
-// import '../blocs/provider.dart';
-// class LoginTela extends StatelessWidget {
-//   @override
-//   Widget build(BuildContext context) {
-//     final bloc = Provider.of(context);
-//     return Container(
-//       margin: EdgeInsets.all(28),
-//       child: Column(
-//         children: [
-//           emailField(bloc),
-//           passwordField(bloc),
-//           Row(children: [
-//             Expanded(
-//               child: Container(
-//                   margin: EdgeInsets.only(top: 12), child: submitButton(bloc)),
-//             )
-//           ])
-//         ],
-//       ),
-//     );
-//   }
-//   Widget emailField(Bloc bloc) {
-//     return StreamBuilder(
-//       stream: bloc.email,
-//       builder: (context, AsyncSnapshot<String> snapshot) {
-//         return TextField(
-//             onChanged: (newValue) {
-//               bloc.changeEmail(newValue);
-//             },
-//             keyboardType: TextInputType.emailAddress,
-//             decoration: InputDecoration(
-//                 hintText: 'seu@email.com',
-//                 labelText: 'Digite seu e-mail',
-//                 errorText: snapshot.error
-//                     ?.toString() //outra forma de fazer a mesma coisa
-//                 ));
-//       },
-//     );
-//   }
-//   Widget passwordField(Bloc bloc) {
-//     return StreamBuilder(
-//       stream: bloc.password,
-//       builder: (context, AsyncSnapshot<String> snapshot) => TextField(
-//         onChanged: bloc.changePassword, //mais uma forma de fazer a mesma coisa
-//         decoration: InputDecoration(
-//             hintText: 'Senha',
-//             labelText: 'Digite sua senha',
-//             // resolvendo o problema do null no inicio
-//             errorText: snapshot.error.toString() == 'null'
-//                 ? null
-//                 : snapshot.error.toString(),
-//             suffixIcon: IconButton(
-//                 icon: Icon(
-//                     bloc.isObscureValue ? Icons.visibility : Icons.visibility_off),
-//                 onPressed: () {
-//                   // print(bloc.isObscure);
-//                   bloc.changeState;
-//                   // print(bloc.isObscure);
-//                 })),
-//         obscureText: bloc.isObscureValue,
-//       ),
-//     );
-//     // return TextField(
-//   }
-//   Widget submitButton(Bloc bloc) {
-//     return StreamBuilder(
-//       stream: bloc.emailAndPasswordAreOk,
-//       builder: (context, AsyncSnapshot<bool> snapshot) {
-//         return ElevatedButton(
-//           onPressed: snapshot.hasData ? () => bloc.submitForm(context) : null,
-//           child: Text('Entrar'),
-//         );
-//       },
-//     );
-//   }
-// }
+import '../utilities/constants.dart';
+import '../utilities/users.dart';
+import '../utilities/custom_route.dart';
+import 'home_screen.dart';
 
-class LoginTela extends StatelessWidget {
+class LoginScreen extends StatelessWidget {
   static const routeName = '/auth';
 
-  const LoginTela({Key? key}) : super(key: key);
+  const LoginScreen({Key? key}) : super(key: key);
 
   Duration get loginTime => Duration(milliseconds: timeDilation.ceil() * 2250);
 
@@ -190,13 +115,13 @@ class LoginTela extends StatelessWidget {
         return _signupUser(signupData);
       },
 
-      // onSubmitAnimationCompleted: () {
-      //   Navigator.of(context).pushReplacement(
-      //     FadePageRoute(
-      //       builder: (context) => const DashboardScreen(),
-      //     ),
-      //   );
-      // },
+      onSubmitAnimationCompleted: () {
+        Navigator.of(context).pushReplacement(
+          FadePageRoute(
+            builder: (context) => const HomeScreen(),
+          ),
+        );
+      },
 
       onRecoverPassword: (name) {
         debugPrint('Recover password info');

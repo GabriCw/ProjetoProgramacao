@@ -1,21 +1,7 @@
 import 'package:flutter/material.dart';
-import './telas/login_tela.dart';
-import './transition_route_observer.dart';
-// import 'blocs/provider.dart';
-
-// class App extends StatelessWidget {
-//   @override
-//   Widget build(BuildContext context) {
-//     return Provider(
-//       child: MaterialApp(
-//         title: 'Login',
-//         home: Scaffold(
-//           body: LoginTela()
-//         )
-//       )
-//     );
-//   }
-// }
+import 'telas/login_screen.dart';
+import './utilities/transition_route_observer.dart';
+import 'telas/home_screen.dart';
 
 class App extends StatelessWidget {
   const App({Key? key}) : super(key: key);
@@ -61,10 +47,10 @@ class App extends StatelessWidget {
             .copyWith(secondary: Colors.orange),
       ),
       navigatorObservers: [TransitionRouteObserver()],
-      initialRoute: LoginTela.routeName,
+      initialRoute: LoginScreen.routeName,
       routes: {
-        LoginTela.routeName: (context) => const LoginTela(),
-        // DashboardScreen.routeName: (context) => const DashboardScreen(),
+        LoginScreen.routeName: (context) => const LoginScreen(),
+        HomeScreen.routeName: (context) => const HomeScreen(),
       },
     );
   }
