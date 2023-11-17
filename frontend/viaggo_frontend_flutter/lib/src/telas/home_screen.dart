@@ -2,6 +2,7 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_login/theme.dart';
 import 'package:flutter_login/widgets.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:viaggo_frontend_flutter/src/utilities/constants.dart';
 import 'package:viaggo_frontend_flutter/src/utilities/transition_route_observer.dart';
@@ -168,7 +169,7 @@ class _HomeScreenState extends State<HomeScreen>
             label: 'Paris',
             interval: const Interval(0, aniInterval),
             onPressed: () {
-              print('Teste01');
+              showToastParis(context);
             }),
         _buildButton(
             icon: Container(
@@ -183,16 +184,95 @@ class _HomeScreenState extends State<HomeScreen>
             label: 'Rio de Janeiro',
             interval: const Interval(step, aniInterval + step),
             onPressed: () {
-              print('Teste02');
+              showToastRJ(context);
             }),
         _buildButton(
             icon: const Icon(FontAwesomeIcons.planeArrival),
             label: 'Nova York',
             interval: const Interval(step * 2, aniInterval + step * 2),
             onPressed: () {
-              print('Teste03');
+              // Fluttertoast.showToast(
+              //   msg: 'Esta é uma mensagem de Toast',
+              //   toastLength: Toast.LENGTH_SHORT, // Define a duração do Toast
+              //   gravity: ToastGravity.BOTTOM, // Posição do Toast na tela
+              //   backgroundColor: Colors.grey,
+              //   textColor: Colors.white,
+              // );
+              showToastNovaYork(context);
             }),
       ],
+    );
+  }
+  
+  void showToastParis(BuildContext context) {
+    final scaffold = ScaffoldMessenger.of(context);
+    scaffold.showSnackBar(
+      SnackBar(
+        content: Container(
+          height: 200, // Altura do SnackBar (ajuste conforme necessário)
+          alignment: Alignment.center,
+          child: Text(
+            'Paris\n\nArrastão do Mbappé\n\nData ida: 21/06/2023\nData volta: 15/07/2023\nValor: R\$ 9.500,00',
+            textAlign: TextAlign.center,
+          ),
+        ),
+        behavior: SnackBarBehavior.floating,
+        backgroundColor: Colors.deepPurple[400],
+        margin: EdgeInsets.symmetric(vertical: 200, horizontal: 20),
+        duration: Duration(seconds: 10000), // Defina a duração desejada do toast
+        action: SnackBarAction(
+          label: 'Fechar',
+          onPressed: scaffold.hideCurrentSnackBar, // Fecha o toast ao clicar no botão "Fechar"
+        ),
+      ),
+    );
+  }
+
+  void showToastRJ(BuildContext context) {
+    final scaffold = ScaffoldMessenger.of(context);
+    scaffold.showSnackBar(
+      SnackBar(
+        content: Container(
+          height: 200, // Altura do SnackBar (ajuste conforme necessário)
+          alignment: Alignment.center,
+          child: Text(
+            'Rio de Janeiro\n\nOlha o assalto\n\nData ida: 15/03/2023\nData volta: 15/04/2023\nValor: R\$ 8.000,00',
+            textAlign: TextAlign.center,
+          ),
+        ),
+        behavior: SnackBarBehavior.floating,
+        backgroundColor: Colors.deepPurple[400],
+        margin: EdgeInsets.symmetric(vertical: 200, horizontal: 20),
+        duration: Duration(seconds: 10000), // Defina a duração desejada do toast
+        action: SnackBarAction(
+          label: 'Fechar',
+          onPressed: scaffold.hideCurrentSnackBar, // Fecha o toast ao clicar no botão "Fechar"
+        ),
+      ),
+    );
+  }
+
+  void showToastNovaYork(BuildContext context) {
+    final scaffold = ScaffoldMessenger.of(context);
+    scaffold.showSnackBar(
+      SnackBar(
+        content: Container(
+          height: 200, // Altura do SnackBar (ajuste conforme necessário)
+          alignment: Alignment.center,
+          child: Text(
+            'Nova York\n\nCelso Portioli não entra aqui!\n\nData ida: 01/01/2023\nData volta: 01/02/2023\nValor: R\$ 10.000,00',
+            textAlign: TextAlign.center,
+          ),
+        ),
+        behavior: SnackBarBehavior.floating,
+        backgroundColor: Colors.deepPurple[400],
+        margin: EdgeInsets.symmetric(vertical: 200, horizontal: 20),
+        duration: Duration(seconds: 10000), // Defina a duração desejada do toast
+        action: SnackBarAction(
+          label: 'Fechar',
+          onPressed: scaffold.hideCurrentSnackBar, // Fecha o toast ao clicar no botão "Fechar"
+        ),
+      ),
     );
   }
 
@@ -209,8 +289,16 @@ class _HomeScreenState extends State<HomeScreen>
             color: Colors.red,
             onPressed: () => _loadingController!.value == 0
                 ? _loadingController!.forward()
-                : _loadingController!.reverse(),
-            child: const Text('loading', style: textStyle),
+                // : () => {_loadingController!.reverse(),
+                : {Fluttertoast.showToast(
+                msg: 'Agora vc é meu namorado',
+                toastLength: Toast.LENGTH_SHORT, // Define a duração do Toast
+                gravity: ToastGravity.BOTTOM, // Posição do Toast na tela
+                backgroundColor: Colors.grey,
+                textColor: Colors.white,
+              )
+                },
+            child: const Text('Surpresinha da Laurinha', style: textStyle),
           ),
         ],
       ),
