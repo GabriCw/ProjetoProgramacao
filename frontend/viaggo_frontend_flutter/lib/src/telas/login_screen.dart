@@ -7,7 +7,6 @@ import '../utilities/constants.dart';
 import '../utilities/users.dart';
 import '../utilities/custom_route.dart';
 import 'home_screen.dart';
-import '../utilities/requisition.dart';
 
 class LoginScreen extends StatelessWidget {
   static const routeName = '/auth';
@@ -16,11 +15,10 @@ class LoginScreen extends StatelessWidget {
 
   Duration get loginTime => Duration(milliseconds: timeDilation.ceil() * 2250);
 
-  Future<String?> _loginUser(LoginData data) {
+  Future<String?> _loginUser(LoginData data) async {
+    var loginOk = await userLogin(data);
     return Future.delayed(loginTime).then((_) {
-      // print(data);
-      // print(userLogin(data));
-      if (userLogin(data) == false) {
+      if (loginOk == false) {
         return 'Dados de login incorretos!';
       }
       return null;

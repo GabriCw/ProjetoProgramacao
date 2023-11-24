@@ -4,20 +4,18 @@ import 'package:flutter_login/flutter_login.dart';
 
 const PORT = 5000;
 
-Future<bool> userLogin(LoginData data) async {
+Future<bool> userLogin(LoginData data) async{
+  Map<String, String> customHeaders = {"content-type": "application/json"};
   var body = jsonEncode({
     "login":data.name,
     "password":data.password
     });
   var url = Uri.http("localhost:$PORT", "/login");
-  print(body);
-  var response = await http.post(url,body: body);
-  // print(response.statusCode);
+  var response = await http.post(url,headers: customHeaders,body: body);
   if (response.statusCode == 200){
-    // print("Deu Bom");
     return true;
-  } else{
-    // print("Deu Ruim");
+  } else {
     return false;
   }
 }
+
