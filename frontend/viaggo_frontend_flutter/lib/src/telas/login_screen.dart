@@ -2,10 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart' show timeDilation;
 import 'package:flutter_login/flutter_login.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:viaggo_frontend_flutter/src/utilities/requisition.dart';
 import '../utilities/constants.dart';
 import '../utilities/users.dart';
 import '../utilities/custom_route.dart';
 import 'home_screen.dart';
+import '../utilities/requisition.dart';
 
 class LoginScreen extends StatelessWidget {
   static const routeName = '/auth';
@@ -16,11 +18,10 @@ class LoginScreen extends StatelessWidget {
 
   Future<String?> _loginUser(LoginData data) {
     return Future.delayed(loginTime).then((_) {
-      if (!mockUsers.containsKey(data.name)) {
-        return 'Usuário não encontrado!';
-      }
-      if (mockUsers[data.name] != data.password) {
-        return 'Senha não confere!';
+      // print(data);
+      // print(userLogin(data));
+      if (userLogin(data) == false) {
+        return 'Dados de login incorretos!';
       }
       return null;
     });
@@ -60,11 +61,11 @@ class LoginScreen extends StatelessWidget {
       loginAfterSignUp: true,
       additionalSignupFields: [
         const UserFormField(
-          keyName: 'Nome de usuário',
+          keyName: 'username',
           icon: Icon(FontAwesomeIcons.userLarge),
         ),
-        const UserFormField(keyName: 'Nome'),
-        const UserFormField(keyName: 'Sobrenome'),
+        const UserFormField(keyName: 'nome'),
+        const UserFormField(keyName: 'sobrenome'),
         UserFormField(
           keyName: 'cpf',
           displayName: 'CPF',
@@ -108,10 +109,10 @@ class LoginScreen extends StatelessWidget {
         debugPrint('Signup info');
         debugPrint('E-mail: ${signupData.name}');
         debugPrint('Senha: ${signupData.password}');
-
         signupData.additionalSignupData?.forEach((key, value) {
           debugPrint('$key: $value');
         });
+        // print(signupData.additionalSignupData?.entries);
         return _signupUser(signupData);
       },
 
