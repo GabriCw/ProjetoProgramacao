@@ -2,8 +2,8 @@ import 'dart:convert';
 import 'package:http/http.dart' as http;
 import 'package:flutter_login/flutter_login.dart';
 
-const userPORT = 31729;      //Localmente utilizar -> Valor padrão: 5000
-const packagePORT = 31297;   //Localmente utilizar -> Valor padrão: 3000;
+const userPORT = 5000;      //Localmente utilizar -> Valor padrão: 5000
+const packagePORT = 3000;   //Localmente utilizar -> Valor padrão: 3000;
 
 Future<bool> userLogin(LoginData data) async {
   Map<String, String> customHeaders = {"content-type": "application/json"};

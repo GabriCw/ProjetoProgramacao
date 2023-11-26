@@ -29,3 +29,5 @@
 #
 ## Vídeo Apresentando Site
 [ViagGo! - Clique Aqui](https://youtu.be/q1GHQPP-UVc) 
+
+[ViagGo! - Segunda Parte (Flutter)](https://youtu.be/zP29vyj8lzU)
