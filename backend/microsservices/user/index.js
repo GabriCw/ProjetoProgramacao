@@ -22,7 +22,7 @@ const users = [
         name: "Davi",
         email: "dav@gmail.com",
         cpf: "11122233344",
-        password: "batata123",
+        password: "Batata123",
         mfa: true
     },
     {
@@ -30,7 +30,7 @@ const users = [
         name: "Gabriel",
         email: "gab@gmail.com",
         cpf: "55566677789",
-        password: "baaasada",
+        password: "Baaasada123",
         mfa: false
     },
     {
@@ -38,7 +38,7 @@ const users = [
         name: "Felipe",
         email: "lip@gmail.com",
         cpf: "52100029312",
-        password: "arregacamoleza",
+        password: "Arregacamoleza123",
         mfa: false
     }
 ];
@@ -175,7 +175,6 @@ app.get("/get-mfa-user", (req, res) => {
 
 //VERIFY IF HAS MFA
 app.get("/verify-mfa", (req, res) => {
-    
     //('Access-Control-Allow-Credentials', true);
     if (req.query.login === '' || req.query.login === null) {
         res.status(400).send("E-mail inválido");
@@ -235,7 +234,7 @@ app.post("/auth-code", (req, res) => {
         res.status(400).send("Código inválido");
         return;
     }
-    
+
     const dateNow = moment().subtract(3, 'hours');
 
     const verifyCode = mfa_user.find(mfa => mfa.code === parseInt(req.body.code) && dateNow <= mfa.expiration_date && !mfa.used);

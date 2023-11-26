@@ -1,10 +1,8 @@
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_login/theme.dart';
 import 'package:flutter_login/widgets.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:viaggo_frontend_flutter/src/utilities/constants.dart';
 import 'package:viaggo_frontend_flutter/src/utilities/transition_route_observer.dart';
 // import '/widgets/animated_numeric_text.dart';
 import '/widgets/fade_in.dart';
@@ -87,7 +85,7 @@ class _HomeScreenState extends State<HomeScreen>
           Padding(
             padding: const EdgeInsets.symmetric(vertical: 8.0),
             child: Hero(
-              tag: Constants.logoTag,
+              tag: "logo",
               child: Image.asset(
                 '../assets/logo.png',
                 filterQuality: FilterQuality.high,
@@ -276,35 +274,6 @@ class _HomeScreenState extends State<HomeScreen>
     );
   }
 
-  Widget _buildDebugButtons() {
-    const textStyle = TextStyle(fontSize: 12, color: Colors.white);
-
-    return Positioned(
-      bottom: 0,
-      right: 0,
-      child: Row(
-        children: <Widget>[
-          MaterialButton(
-            materialTapTargetSize: MaterialTapTargetSize.shrinkWrap,
-            color: Colors.red,
-            onPressed: () => _loadingController!.value == 0
-                ? _loadingController!.forward()
-                // : () => {_loadingController!.reverse(),
-                : {Fluttertoast.showToast(
-                msg: 'Agora vc é meu namorado',
-                toastLength: Toast.LENGTH_SHORT, // Define a duração do Toast
-                gravity: ToastGravity.BOTTOM, // Posição do Toast na tela
-                backgroundColor: Colors.grey,
-                textColor: Colors.white,
-              )
-                },
-            child: const Text('Surpresinha da Laurinha', style: textStyle),
-          ),
-        ],
-      ),
-    );
-  }
-
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
@@ -350,7 +319,6 @@ class _HomeScreenState extends State<HomeScreen>
                     ),
                   ],
                 ),
-                if (!kReleaseMode) _buildDebugButtons(),
               ],
             ),
           ),
